@@ -1,0 +1,7 @@
+# Processador de Manuscritos Genealógicos — dependências
+# Instalar com:  pip install -r requirements.txt
+
+google-generativeai>=0.8.0   # Cliente oficial Gemini/Google AI
+pymupdf>=1.24.0               # Conversão PDF → imagem (importado como 'fitz')
+Pillow>=10.0.0                # Manipulação de imagens
+python-dotenv>=1.0.0          # Leitura do ficheiro .env

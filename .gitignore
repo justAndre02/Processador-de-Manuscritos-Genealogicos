@@ -1,0 +1,12 @@
+# Variáveis de ambiente — NUNCA commitar este ficheiro
+.env
+
+# Resultados gerados automaticamente
+saida/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/

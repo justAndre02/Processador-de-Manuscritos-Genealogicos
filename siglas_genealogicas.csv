@@ -1,0 +1,153 @@
+﻿Sigla,Expansão,Categoria,Significado / Uso,Exemplo Tipo (data/arquivo),Notas / Transcrição
+bat. / bap. / bapt.,baptizado / baptismo,termos religiosos,indica baptismo,Bat. 12/05/1743 (registo paroquial),"Variações: bat., bap. e bapt. são comuns"
+n. / nasc.,nascido / nascida,estado civil/filiação,nascido(a),"""n. em 10 de Março""",Muitas vezes aparece com data
+leg. / legit.,legítimo,estado civil/filiação,filho legítimo,"""João, legit.""",Contrapõe-se a ileg.
+ileg. / esp. / espú.,ilegítimo / espúrio,estado civil/filiação,filho fora do casamento,"""Maria, ileg.""",esp. = espúrio
+padr.,padrinho,parentesco,padrinho do baptizado,"""António, padr. do bapt.""",Feminino: madr.
+madr. / madr.ª,madrinha,parentesco,madrinha,"""Ana, madr.ª""",Supressão de vogais
+f.º / f.ª,filho / filha,parentesco,parentesco,"""Manuel f.º de …""",Também aparece fil.
+ir. / ir.ª / Ir. / Ir.ª,irmão / irmã,parentesco,parentesco,"""Luiza Maria Ir.ª""",usado em fogos chefiados por padre ou em ausência dos pais
+m. / ma.,mãe,parentesco,parentesco,"""Francisca, m. de João""","Raro abreviado; ATENÇÃO: ""m."" após f.º/f.ª significa ""menor"" (Observações), NÃO ""mãe"""
+f.º m. / f.ª m.,filho menor / filha menor,parentesco,menor de idade (isento de confissão),"""Catharina f.ª m.""","parentesco = filho/filha; observações = ""menor"""
+p. / pai,pai,parentesco,parentesco,"""João p. de …""",p. pode ser ambíguo
+sobr.º,sobrinho,parentesco,parentesco,"""José sobr.º""",Geralmente aparece completo
+Primo / Prima,primo / prima,parentesco,parentesco,"""P.e Jozé Primo""","aparece por extenso; indica grau de parentesco cousin — não confundir com P.e (Padre)"
+viu. / viu.o / viuva,viúvo / viúva,estado civil/filiação,estado civil,"""Maria, viu.""",Também V.º
+soltra. / soltro.,solteira / solteiro,estado civil/filiação,estado civil,"""Inês soltra."" (1688)",Muito comum
+S.ª / S.º,solteira / solteiro,estado civil/filiação,estado civil,"""Anna Pr.ª S.ª""",Abreviatura maiúscula — não confundir com apelido
+cass.do / cass.ª,casado / casada,estado civil/filiação,estado civil,registos de casamento,Pode aparecer caz.
+def.to / def.ta / def.,defunto / defunta,estado civil/filiação,falecido,"""João, def.to""",Usado em óbitos
+test. / testa.,testamento / testador,termos administrativos,acto notarial,documentos notariais,Usado em inventários
+p.º / P.º,Pedro / Pero,nomes próprios,nome próprio,"""P.º Manuel""",Abreviação comum
+Joaq.m / Joaqq.m,Joaquim,nomes próprios,nome próprio,índices paroquiais,q duplicado
+M.a / Maª,Maria,nomes próprios,nome próprio,"""M.a Francisca""",Muito comum
+Ign.o,Inácio,nomes próprios,nome próprio,registos antigos,Arcaísmo
+D. / D.ª / D.n,Dom / Dona,tratamentos/títulos,tratamento honorífico,assinaturas,Tratamento nobre
+Fr. / Fri.,Frei,tratamentos/títulos,título religioso,registos conventuais,Variante frade
+oP.e / P.e,Padre,tratamentos/títulos,título religioso,assento paroquial,Usado em cabeçalhos
+R.do,Reverendo,tratamentos/títulos,título religioso,documentos eclesiásticos,Abrev. reverendo
+D.or / Dr.,Doutor,tratamentos/títulos,título académico,documentos jurídicos,Notariais
+serv. / serva,servo / serva,termos administrativos,status social,"""Manuel, servo de …""",escravo
+subjecto / subjecta,subjecto,termos administrativos,escravo (latim),documentos coloniais,forma latinizada
+mor. / morador,morador,termos administrativos,residência,"""mor. da rua …""",residência local
+nat. / natural,natural de,termos administrativos,origem,"""nat. de Braga""",origem geográfica
+freg. / frg.,freguesia,topónimos,divisão administrativa,"""freg. de S. João""",às vezes por extenso
+pob. / povo,povoação,topónimos,localidade,"""pob. de …""",menos comum
+da / de / d',de / da / do,apelidos,preposição,"""Maria da S.""",parte de apelido
+daS.a / daS.º,da Silva,apelidos,apelido,"""António daS.a"" / ""Manoel daS.º""","forma masculina (daS.º) e feminina (daS.a); determinante colado à sigla"
+Sz.ª,Sousa,apelidos,apelido,"""Manuel Sz.ª""",z indica Sousa
+Glz / Gliz,Gonçalves,apelidos,apelido,"""Manuel Glz.""",comum séc. XVIII
+Roiz / Riz,Rodrigues,apelidos,apelido,"""João Roiz""",-iz indica Rodrigues
+R.o,Rodrigo,nomes próprios,nome,"""R.o Pereira""",abreviado
+Rib.ro / Rib.,Ribeiro,apelidos,apelido,"""António Rib.ro""",forma clara
+P.ra / P.ª / Pr.ª / Pr.a,Pereira,apelidos,apelido,"""João P.ra"" / ""Anna Pr.ª""",muito frequente; Pr.ª é variante comum nestes registos
+Vas.cos,Vasconcelos,apelidos,apelido,"""João Vas.cos""",encurtamento
+Fon.ca,Fonseca,apelidos,apelido,"""Maria Fon.ca""",abreviação comum
+Daºseca,da Fonseca,apelidos,apelido,"""António Daºseca""",º representa 'o'
+a.,ano,meses/datas,idade,"""1 a.""",idade
+m.º,mês,meses/datas,data,"""m.º de Março""",contexto necessário
+p.ro,primeiro,meses/datas,data/ordem,"""p.ro de Janeiro""",ordinal
+jur.,juramento,termos administrativos,acto legal,escrituras,notarial
+proc.,procuração / processo,termos administrativos,documento,notariais,contexto
+cap. / cap.t,capitão,tratamentos/títulos,título militar,documentos militares,profissão
+mol.,moleiro,termos administrativos,profissão,"""João, mol.""",profissão
+oleiro / olei.ro,oleiro,termos administrativos,profissão,"""Francisco oleiro""",pode abreviar
+cr.o / cr.ª,criado / criada,termos administrativos,servente doméstico,"""Miguel cr.o""",criado doméstico
+m.er / mul.,mulher,parentesco,esposa,"""Ana m.er de …""",esposa
+hom. / hom,homem / marido,parentesco,marido (referência ao cônjuge ausente),"""hom. abz.""",usado em combinação com abz. para indicar marido ausente
+abz. / abz,ausente,estado civil/filiação,pessoa ausente do fogo ou do registo,"""Maria Fran.ca hom. abz.""",vai para o campo Observações como "homem ausente"
+obz. / obz,ausente,estado civil/filiação,variante paleográfica de abz. — pessoa ausente,"""Jozé Ant. m.er obz.""",vai para o campo Observações como "mulher ausente" (ou "homem ausente" consoante contexto)
+pad.,padeiro,termos administrativos,profissão,"""João pad.""",pode ser ambíguo
+caz. / caz.do,casamento / casado,estado civil/filiação,estado civil,"""caz. 1750""",grafia antiga
+Ag.º,Agostinho,nomes próprios,nome próprio / apelido,lista de abreviaturas (compilação),forma abreviada de Agostinho
+Alv.º / Allv.º,Álvaro,nomes próprios,nome próprio,lista de abreviaturas (compilação),variante com dupla consoante
+Aºseca,Afonseca / d'Afonseca,apelidos,apelido,lista de abreviaturas (compilação),contração típica de Afonseca / da Fonseca
+Fr.co / Fr.ca / Fran.co / Fran.ca / Fran.º / Fr.º,Francisco / Francisca,nomes próprios,nome próprio,lista de abreviaturas (compilação),"formas mascul./femin.; ATENÇÃO: Fran.º / Fran.co NÃO são Frz. (Fernandes) — o ""an"" cursivo pode parecer ""z"""
+F.do / Fr.do,Fernando,nomes próprios,nome próprio,lista de abreviaturas (compilação),Fernando abreviado com ponto
+Fg.do / Fig.do,Figueiredo,apelidos,apelido,lista de abreviaturas (compilação),forma com -do final
+Mart.o,Martinho,nomes próprios,nome próprio,lista de abreviaturas (compilação),Martinho contraído
+Xp.to / Xp.vão / X.vao / Xp.am / Xpto.vam,Cristo / Cristovão / Cristãos,termos religiosos,nomes religiosos/abreviação de Cristo,lista de abreviaturas (compilação),sinais xar e p — usados em fórmulas religiosas
+7bro / 8bro / 9bro / 10bro,Setembro / Outubro / Novembro / Dezembro,meses/datas,meses (datas),lista de abreviaturas (compilação),notação retrograda para meses com -bro
+L.do,Licenciado,tratamentos/títulos,título académico,lista de abreviaturas (compilação),usado em ofícios e entradas notariais
+Dez.or,Desembargador,tratamentos/títulos,cargo/judicial,lista de abreviaturas (compilação),título jurídico alto
+S.bam / Seb.am,Sebastião,nomes próprios,nome próprio,lista de abreviaturas (compilação),forma contraída de Sebastião
+Miz.ª,Misericórdia,termos religiosos,referência de irmandade/obra,lista de abreviaturas (compilação),aparece em notas de confrarias
+Mag.da,Madalena,nomes próprios,nome próprio,lista de abreviaturas (compilação),variante de Madalena
+Mad.ra,Madeira,topónimos,apelido / topónimo,lista de abreviaturas (compilação),forma contraída de Madeira
+M.cas / Maz / Mas,Mascarenhas,apelidos,apelido,lista de abreviaturas (compilação),variantes de Mascarenhas
+X.er,Xavier,nomes próprios,apelido / nome próprio,lista de abreviaturas (compilação),forma curta de Xavier
+A.o / Aff.o,Afonso,nomes próprios,nome próprio,registos paroquiais séc. XVII-XVIII,forma contraída de Afonso
+An.to / An.ta,António / Antónia,nomes próprios,nome próprio,registos paroquiais séc. XVII-XVIII,formas masc./fem. muito frequentes
+B.ar,Baltazar,nomes próprios,nome próprio,registos paroquiais séc. XVII-XVIII,abreviatura de Baltazar
+Bart.o / B.eu / B.meu,Bartolomeu,nomes próprios,nome próprio,registos paroquiais séc. XVII-XVIII,variantes de Bartolomeu
+B.or,Belchior,nomes próprios,nome próprio,registos paroquiais séc. XVII-XVIII,nome documentado nos registos
+C.na / C.ª,Catarina,nomes próprios,nome próprio,registos paroquiais séc. XVII-XVIII,C.ª forma muito comum
+D.o,Diogo,nomes próprios,nome próprio,registos paroquiais séc. XVII-XVIII,não confundir com D. = Dom
+D.os / D.as,Domingos / Domingas,nomes próprios,nome próprio,registos paroquiais séc. XVII-XVIII,masc./fem. do mesmo radical
+D.rte,Duarte,nomes próprios,nome próprio,registos paroquiais séc. XVII-XVIII,abreviação típica de Duarte
+G.ar,Gaspar,nomes próprios,nome próprio,registos paroquiais séc. XVII-XVIII,abreviatura de Gaspar
+G.º / Gon.co,Gonçalo,nomes próprios,nome próprio,registos paroquiais séc. XVII-XVIII,não confundir com Glz = Gonçalves
+H.e,Henrique,nomes próprios,nome próprio,registos paroquiais séc. XVII-XVIII,abreviatura de Henrique
+J.mo / Hier.mo,Jerónimo,nomes próprios,nome próprio,registos paroquiais séc. XVII-XVIII,Hier.mo é forma latinizada
+Joaq.na,Joaquina,nomes próprios,nome próprio feminino,registos paroquiais séc. XVII-XVIII,feminino de Joaquim; Joaq.m já estava na tabela
+L.co,Lourenço,nomes próprios,nome próprio,registos paroquiais séc. XVII-XVIII,abreviatura de Lourenço
+M.el,Manuel,nomes próprios,nome próprio,registos paroquiais séc. XVII-XVIII,forma muito comum; também Man.el
+Mg.l,Miguel,nomes próprios,nome próprio,registos paroquiais séc. XVII-XVIII,abreviatura de Miguel
+Alves / Alvres / Alz,Álvares,apelidos,apelido,registos paroquiais séc. XVII-XVIII,variantes gráficas de Álvares
+An.tes,Antunes,apelidos,apelido,registos paroquiais séc. XVII-XVIII,patronímico de António
+Andr.e,Andrade,apelidos,apelido,registos paroquiais séc. XVII-XVIII,apelido frequente no Minho
+Ar.º / de A. / de Ar.º,Araújo / de Araújo,apelidos,apelido,"""Jozé de A."" / ""Valentin de Ar.º""","determinante ""de"" pode aparecer colado à sigla; A. sozinho só expande para Araújo em contexto de apelido"
+C.ta,Costa,apelidos,apelido,registos paroquiais séc. XVII-XVIII,forma abreviada de Costa
+Con.tras,Contreiras,apelidos,apelido,registos paroquiais séc. XVII-XVIII,apelido com abreviação interna
+D.es,Domingues,apelidos,apelido,registos paroquiais séc. XVII-XVIII,patronímico de Domingos
+Diz,Dias,apelidos,apelido,registos paroquiais séc. XVII-XVIII,abreviatura de Dias
+Figr.a,Figueira,apelidos,apelido / topónimo,registos paroquiais séc. XVII-XVIII,não confundir com Fg.do = Figueiredo
+Fr.ª / Ferr.ª / Fr.ra / Ferr.a / Fer.ª / Frr.ª / Ferz.al,Ferreira,apelidos,apelido,registos paroquiais séc. XVII-XVIII,"variantes de Ferreira; apelido muito comum; o rr cursivo pode parecer rz — não confundir com Frz./Friz (Fernandes)"
+Frz / Friz,Fernandes,apelidos,apelido,registos paroquiais séc. XVII-XVIII,"patronímico de Fernando; ATENÇÃO: Frz tem apenas Fr+z; Ferr.a/Ferr.ª/Frr.ª com duas letras r = Ferreira, não Fernandes"
+G.ro / G.ra,Guerreiro / Guerreira,apelidos,apelido,registos paroquiais séc. XVII-XVIII,masc./fem. do apelido Guerreiro
+M.ca / M.ça,Mendonça,apelidos,apelido,registos paroquiais séc. XVII-XVIII,variantes de Mendonça
+M.da / Marg.da / Mg.da,Margarida,nomes próprios,nome próprio feminino,registos paroquiais séc. XVII-XVIII,variantes de Margarida
+Mag.es,Magalhães,apelidos,apelido,registos paroquiais séc. XVII-XVIII,apelido frequente no Noroeste
+Mdz,Mendes,apelidos,apelido,registos paroquiais séc. XVII-XVIII,patronímico de Mendo
+Mir.da,Miranda,apelidos,apelido / topónimo,registos paroquiais séc. XVII-XVIII,apelido e topónimo
+Miz,Martins,apelidos,apelido,registos paroquiais séc. XVII-XVIII,não confundir com Miz.ª = Misericórdia
+N.es,Nunes,apelidos,apelido,registos paroquiais séc. XVII-XVIII,patronímico de Nuno
+Oliv.ra,Oliveira,apelidos,apelido,registos paroquiais séc. XVII-XVIII,apelido muito frequente
+Piz,Pires,apelidos,apelido,registos paroquiais séc. XVII-XVIII,patronímico de Pero/Pedro
+Seq.ra / Siq.ra,Sequeira,apelidos,apelido,registos paroquiais séc. XVII-XVIII,variantes gráficas de Sequeira
+V.a / V.ra / Vr.a,Vieira,apelidos,apelido,registos paroquiais séc. XVII-XVIII,variantes de Vieira
+V.e / V.te,Vicente,nomes próprios,nome próprio,registos paroquiais séc. XVII-XVIII,abreviatura de Vicente
+F.ro,Fevereiro,meses/datas,mês (data),registos paroquiais séc. XVII-XVIII,abreviatura de Fevereiro em datas
+m.to,muito,termos administrativos,qualificativo / advérbio,registos paroquiais e notariais séc. XVII-XVIII,abreviatura frequente em formulários paroquiais
+tend.ro,Tendeiro,termos administrativos,profissão,registos paroquiais séc. XVII-XVIII,o que tem tenda e vende nela (Dict. 1789)
+huü / nhuü,um / nenhum,termos administrativos,numeral / pronome (arcaico),documentos notariais e paroquiais séc. XVII,forma arcaica de grafia; desaparece no séc. XVIII
+Postiço / Postiça,exposto / enjeitado,estado civil/filiação,condição da criança,livros de expostos paroquiais séc. XVII-XVIII,criança abandonada ou adoptada
+Amenta / Ementa,reza por defunto / pagamento ao pároco,termos religiosos,acto religioso / acto financeiro,registos de óbito séc. XVII-XVIII,ex: 'amenta annual e carneiro 1600r' em livros de óbito
+Beneficiado,Padre que goza de Benefício,tratamentos/títulos,título eclesiástico,registos de casamento e óbito séc. XVII-XVIII,tença instituída por benfeitor; distingue-se de simples pároco
+Banhos,publicação de editais de casamento (proclamas),termos religiosos,acto canónico,registos de casamento séc. XVII-XVIII,publicação pública do noivado; dispensa exigia autorização do Provisor
+in facie ecclesiae,publicamente na face da Igreja,termos religiosos,fórmula latina de casamento,registos de casamento séc. XVII-XVIII,indica casamento público e válido canonicamente; fórmula tridentina
+tempore prohibito,em tempo proibido para casamentos,termos religiosos,restrição canónica,registos de casamento séc. XVII-XVIII,Quaresma e Advento; exigia dispensa do Provisor ou Vigário Geral
+cum facultate superioris / cum fac. sup.,com licença do superior eclesiástico,termos religiosos,autorização canónica,registos de casamento séc. XVII-XVIII,frequente combinado com 'tempore prohibito'
+sub conditione / sub cond.,baptismo sob condição,termos religiosos,acto sacramental,registos de baptismo séc. XVII-XVIII,aplicado a crianças expostas ou com dúvida sobre baptismo anterior
+Almocreve,transportador com bestas de carga,termos administrativos,profissão,registos paroquiais séc. XVII-XVIII,o que anda com bestas de carga e transporte (Dict. 1848)
+Sangrador,barbeiro-sangrador,termos administrativos,profissão,registos paroquiais séc. XVII-XVIII,o que sangra por ofício (Dict. 1789)
+Meirinho,oficial de justiça,termos administrativos,profissão / cargo,registos paroquiais séc. XVII-XVIII,"executa prisões, penhoras e mandatos judiciais"
+Feitor,administrador / rendeiro / caseiro,termos administrativos,profissão,registos paroquiais e notariais séc. XVII-XVIII,administrador de fazenda alheia (Dict. 1848)
+Cordoeiro,fabricante de cordas,termos administrativos,profissão,registos paroquiais séc. XVII-XVIII,o que faz cordas (Dict. 1848)
+Cerieiro,negociante ou trabalhador em cera,termos administrativos,profissão,registos paroquiais séc. XVII-XVIII,pessoa que trabalha ou negoceia em cera
+Estanqueiro,vendedor de tabaco / monopolista,termos administrativos,profissão,registos paroquiais séc. XVII-XVIII,tem loja de tabaco ou estanco de mercadoria (Dict. 1848)
+f.al,oficial,parentesco,Oficial / trabalhador do fogo (equivalente a criado / servo),rol de confessados séc. XVIII,vai para a coluna Parentesco; não confundir com 'fora de alimento'
+sp. / sep.,separada,observações,estado de separação conjugal,rol de confessados séc. XVIII,vai para a coluna Observações; EstadoCivil mantém-se casado/a
+Lopez / Lop.,Lopes,apelidos,apelido português comum,"""Manoel Lopez""","grafia arcaica de Lopes; o L cursivo pode ser lido erroneamente como C (''Copey'')"
+cund. / cunh. / cund.ª / cunh.ª,cunhado / cunhada,parentesco,grau de parentesco por afinidade,"""Roza M.ª cund.ª""",vai para o campo Observações quando a pessoa é cabeça de sub-fogo (//)
+Thomaz / Thom.z / Thomay,Tomás,nomes próprios,nome próprio,registos paroquiais séc. XVII-XVIII,terminações -az / -z / -ay indicam Tomás (o y cursivo é variante de z); NÃO confundir com Thomé (terminação -é / -e)
+Thomé / Thome,Tomé,nomes próprios,nome próprio,registos paroquiais séc. XVII-XVIII,a terminação -é / -e indica Tomé; distinto de Thomaz = Tomás
+de Leyva / Leyva / deLeyv.a,de Leiva,apelidos,apelido,registos paroquiais séc. XVII-XVIII,"apelido de origem castelhana; grafia Leyva → actualizar para Leiva"
+M.do / Mach.do / N.do / M.dº / Mdo,Machado,apelidos,apelido,registos paroquiais séc. XVII-XVIII,"abreviatura de Machado; terminação -do com traço abreviativo; o M cursivo pode ser lido como N (confusão paleográfica comum)"
+Px.to / Px.ª / Pix.to,Peixoto,apelidos,apelido,registos paroquiais séc. XVII-XVIII,"abreviatura de Peixoto; Px = Pe+ix contraído; terminação -to; Px.ª = forma feminina"
+do Ó / d'Ó,do Ó,apelidos,apelido de devoção mariana,registos paroquiais séc. XVII-XVIII,"apelido raro derivado de Nossa Senhora do Ó; após nome próprio (ex: D. Maria do Ó)"
+Escrava / Escravo / Escrav.,escrava / escravo,termos administrativos,status social (cativo),registos paroquiais séc. XVII-XVIII,"vai para Observações; parentesco mantém-se criada/criado; E cursivo pode parecer C tornando Escrava em Cicrava"
+Escudr.o / Escudr.º / Ecudr.º / Escudro,Escudeiro,termos administrativos,título de criado nobre,registos paroquiais séc. XVII-XVIII,"vai para Observações; parentesco mantém-se criado; título nobiliárquico de servidor"
+de Eça / d'Eça / D'Eça / deEça,de Eça,apelidos,apelido nobre,registos paroquiais séc. XVII-XVIII,"apelido por extenso; E cursivo pode parecer B tornando 'Eça' em 'Beca' (B←→E confusão); se leres 'de Beca' ou 'dBeca' após D./D.ª reconsidera 'de Eça'"
+da Luz / daLuz / d'Luz,da Luz,apelidos,apelido de devoção mariana,registos paroquiais séc. XVII-XVIII,"apelido; NUNCA confundir com nome próprio Luísa/Luís — 'daLuz' ou 'd.Luz' após nome próprio é SEMPRE o apelido 'da Luz' (ex: 'Maria daLuz' → nome_expandido='Maria da Luz')"
+Montr. / Montr.o / Mont.ro,Monteiro,apelidos,apelido,registos paroquiais séc. XVII-XVIII,apelido frequente; forma abreviada de Monteiro
