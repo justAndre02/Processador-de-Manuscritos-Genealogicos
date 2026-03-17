@@ -6,7 +6,7 @@ Sistema em Python para extracção automática de dados genealógicos a partir d
 
 ## Contexto
 
-Os documentos processados são **Róis de Confessados** (também chamados Róis de Desobriga ou Pascais), registos paroquiais do séc. XVIII que listam os habitantes de uma freguesia organizados por agregados familiares (fogos). Neste caso concreto trata-se da freguesia de **Oliveira de Gumiarães**, com registos do ano **1790**.
+Os documentos processados são **Róis de Confessados** (também chamados Róis de Desobriga ou Pascais), registos paroquiais do séc. XVIII que listam os habitantes de uma freguesia organizados por agregados familiares (fogos). Neste caso concreto trata-se da freguesia de **Oliveira de Gumiarães**, com registos dos anos **1700-1800**.
 
 Cada página do manuscrito lista os moradores de um conjunto de ruas ou lugares, identificando o chefe de cada fogo, os restantes membros da família, o seu grau de parentesco ou estado civil, e se cada pessoa cumpriu o preceito pascal (confissão anual).
 
