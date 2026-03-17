@@ -227,7 +227,10 @@ Se a abreviatura após um nome tem duas letras começando por `c`, é `cr.` (cri
 **`Ir.` vs `f.` (filho)**: `Ir.` tem DUAS letras (`I`+`r`); `f.` filho é UMA única letra `f`. \
 Se a abreviatura após um nome tem duas letras começando por `I`/`i`, é `Ir.` (irmão) — NUNCA `f.` (filho). \
 `"Joaquim Fr.co de Leyva Ir."` → `parentesco="irmão"`, NÃO filho.
-f.al = oficial (trabalhador do fogo — vai para Parentesco se não houver `//`; \
+f.al = oficial **apenas para homens** (não é grau de parentesco — coloca `"oficial"` em `observacoes`, \
+usa `parentesco="outro"`); \
+**REGRA CRÍTICA**: se `f.al` aparecer após um nome **feminino** (sexo=F), NÃO é "oficial" — \
+é quase sempre uma leitura errada de `f.ª` (filha); usa `parentesco="filha"` e **não** colocas nada em `observacoes`; \
 se a linha tiver `//`, vai para `observacoes` e `parentesco = "cabeça"`); \
 sobr.º/sobr.ª = sobrinho/sobrinha; serv./servo/serva = servo/serva; etc. \
 **ATENÇÃO paleográfica — `Ir.` vs `Sz.`**: nestes manuscritos o `I` cursivo assemelha-se a um `S` \
@@ -303,6 +306,7 @@ válido com a estrutura seguinte (sem texto antes ou depois, sem blocos de códi
 
 {{
   "lugar_atual": "novo lugar se aparecer ANTES do primeiro fogo da página, caso contrário null",
+  "lugar_proximo": "nome do novo lugar se um indicador de lugar aparecer DEPOIS do ÚLTIMO fogo da página (fim de página, a anunciar a secção seguinte), caso contrário null",
   "grupos": [
     {{
       "simbolo": "# | // | ~",
@@ -313,7 +317,7 @@ válido com a estrutura seguinte (sem texto antes ou depois, sem blocos de códi
           "nome_expandido": "APENAS o nome próprio e apelido com abreviaturas do nome expandidas — SEM palavras de papel ou estado civil",
           "sexo": "M ou F",
           "estado_civil": "casado | casada | solteiro | solteira | viúvo | viúva | desconhecido",
-                    "parentesco": "cabeça | mulher | filho | filha | irmão | irmã | primo | prima | criado | criada | oficial | servo | serva | neto | neta | sobrinho | sobrinha | sogro | sogra | genro | nora | cunhado | cunhada | tio | tia | avô | avó | pai | mãe | outro | desconhecido",
+                    "parentesco": "cabeça | mulher | filho | filha | irmão | irmã | primo | prima | criado | criada | servo | serva | neto | neta | sobrinho | sobrinha | sogro | sogra | genro | nora | cunhado | cunhada | tio | tia | avô | avó | pai | mãe | outro | desconhecido",
           "confessou": "sim | não | ilegível",
           "observacoes": "notas relevantes separadas por vírgula, vazio se não houver"
         }}
@@ -434,14 +438,18 @@ afecta nem altera o estado civil — vai apenas para `observacoes`. \
 **Exemplo concreto**: `11 Rodrigo de Freitas V.º cunh.` → \
 `simbolo="//"`, `nome_original="Rodrigo de Freitas"`, `parentesco="cabeça"`, \
 `estado_civil="viúvo"` (V.º lido antes de cunh.), `observacoes="cunhado"`.
-4. `f.al` após um nome = parentesco **"oficial"** (trabalhador do fogo).
+4. `f.al` após um nome **masculino** (sexo=M) = o membro é um trabalhador do fogo ("oficial"); \
+coloca `"oficial"` em `observacoes` e usa `parentesco="outro"` (não é um grau de parentesco). \
+`f.al` após um nome **feminino** (sexo=F) = leitura errada de `f.ª` → `parentesco="filha"`, \
+nada em `observacoes`.
 5. `sp.` / `Sep.` / `sep.` / `Se.p` / `se.p` após um nome = a pessoa está separada → \
 coloca **"separado"** (se `sexo` = M) ou **"separada"** (se `sexo` = F) em `observacoes`; \
 o `estado_civil` mantém-se normalmente "casado/a".
-6. **Cônjuge ausente** (`abz.` / `obz.` são a mesma abreviatura — ambas = ausente): \
+6. **Cônjuge ausente ou preso** (`abz.` / `obz.` são a mesma abreviatura — ambas = ausente): \
    - `hom. abz.` / `hom. obz.` após o nome de uma mulher = o marido está ausente → coloca `"homem ausente"` em `observacoes`. \
+   - `hom. prezo` / `hom. prez.` após o nome de uma mulher = o marido está preso → coloca `"homem preso"` em `observacoes`. \
    - `m.er abz.` / `m.er obz.` após o nome de um homem = a mulher está ausente → coloca `"mulher ausente"` em `observacoes`. \
-   Em ambos os casos, `estado_civil` mantém-se "casado/a".
+   Em todos estes casos, `estado_civil` mantém-se "casado/a".
 6. **Estado civil por omissão**: se o estado civil não estiver explicitamente indicado \
 no manuscrito, aplica esta regra:
    - Parentesco **filho, filha, irmão, irmã, criado, criada, servo, serva, neto, neta, sobrinho, sobrinha** \
@@ -457,7 +465,7 @@ a mulher fica com `estado_civil="casada"`. Nunca uses "casado" para anular um `V
 aplica esta hierarquia estrita: \
      1. Se identificaste explicitamente **solteiro/solteira** (`S.º`/`soltr.`/`solt.`) → usa `"solteiro/a"`. \
      2. Se identificaste explicitamente **viúvo/viúva** (`V.ª`/`V.o`/`viu.`/etc.) → usa `"viúvo/a"`. \
-     3. Se identificaste `cas.`/`caz.` explícito OU cônjuge ausente (`hom. abz.`/`m.er abz.`) → usa `"casado/a"`. \
+     3. Se identificaste `cas.`/`caz.` explícito OU cônjuge ausente/preso (`hom. abz.`/`hom. prezo`/`m.er abz.`) → usa `"casado/a"`. \
      4. **Em QUALQUER outro caso** (incluindo quando serias tentado a escrever "casado/a" \
 sem marcador explícito) → usa **`"viúvo"`** (se sexo M) ou **`"viúva"`** (se sexo F). \
 Justificação: o modelo confunde `V.ª` (viúva) com abreviaturas de casado/a, mas raramente \
@@ -547,6 +555,13 @@ Exemplo: `"Florinda Ingeitada m."` → `parentesco="outro"`, `observacoes="enjei
 8c. **Escudeiro** (`Escudr.o` / `Escudr.º` / `Ecudr.º` / `Escudro` / `Escudiero`): \
 título/função de criado nobre → coloca "Escudeiro" em `observacoes`; \
 `parentesco` mantém-se **"criado"**.
+8d. **In minoribus** (`inmino.` / `in mino.` / `in min.`): a pessoa recebeu ordens menores \
+mas não foi ordenada sacerdote → coloca `"in minoribus"` em `observacoes`; \
+não afecta `parentesco` nem `estado_civil`.
+8e. **Capitão** (`Capp.am` / `oCapp.am`): título militar → coloca `"Capitão"` em `observacoes`; \
+não afecta `parentesco` nem `estado_civil`.
+8f. **Primeira tença** (`pr.a Ten.ca` / `prim.a Ten.ca` / `pr.a Tença`): renda ou pensão anual \
+→ coloca `"primeira tença"` em `observacoes`; não afecta `parentesco` nem `estado_civil`.
 9. **`F.` como anotação de falecimento** (acima ou ao longo da linha horizontal): a pessoa \
 **faleceu** — coloca **"falecida"** (sexo F) ou **"falecido"** (sexo M) em `observacoes`. \
 `F.` é independente de "Confes.": `confessou` segue a regra habitual mesmo que `F.` esteja presente. \
@@ -557,10 +572,14 @@ Se não houver indicação de estado civil, aplica a regra de omissão normal; \
 10. Se não conseguires ler uma palavra, usa "[ilegível]".
 11. **Lugar**: um indicador de lugar (texto em letras maiores) aplica-se APENAS aos fogos \
 que aparecem A SEGUIR a esse indicador, nunca aos fogos anteriores. \
-Se o indicador aparece antes do primeiro fogo da página → usa `lugar_atual` (nível da página). \
-Se aparece a meio da página, entre fogos → coloca o nome em `lugar_novo` do **primeiro fogo** \
+Há três posições possíveis para o indicador: \
+a) **Antes do primeiro fogo** da página → usa `lugar_atual` (nível da página). \
+b) **A meio da página, entre fogos** → coloca o nome em `lugar_novo` do **primeiro fogo** \
 que se segue ao indicador; os fogos anteriores a esse indicador pertencem ao lugar anterior. \
-`lugar_novo` deve ser `null` em todos os outros fogos onde o lugar não muda."""
+c) **Depois do ÚLTIMO fogo** da página (fim de página, a anunciar a secção seguinte) → usa \
+`lugar_proximo`; os fogos desta página pertencem ao lugar anterior, não a este novo. \
+`lugar_novo` deve ser `null` em todos os fogos onde o lugar não muda. \
+`lugar_proximo` deve ser `null` se não existir indicador de lugar no fim da página."""
 
 # ====================================================================
 # CHAMADA À API GEMINI
@@ -592,12 +611,15 @@ def call_gemini(image: Image.Image, prompt: str, model, lugar_atual: str = "") -
         page_context = (
             f"\n\n**CONTEXTO DESTA PÁGINA**: O lugar actualmente em vigor é "
             f"'{lugar_atual}'. Devolve `null` em `lugar_atual` se NÃO aparecer "
-            f"um lugar/rua diferente nesta página."
+            f"um lugar/rua diferente ANTES do primeiro fogo desta página. "
+            f"Se aparecer um indicador de lugar no FINAL da página (depois do último fogo), "
+            f"coloca-o em `lugar_proximo`."
         )
     else:
         page_context = (
             "\n\n**CONTEXTO DESTA PÁGINA**: Ainda não foi identificado nenhum lugar. "
-            "Se aparecer um nome de lugar ou freguesia nesta página, regista-o em `lugar_atual`."
+            "Se aparecer um nome de lugar ou freguesia ANTES do primeiro fogo, regista-o em `lugar_atual`. "
+            "Se aparecer depois do último fogo, regista-o em `lugar_proximo`."
         )
     full_prompt = prompt + page_context
 
@@ -711,7 +733,19 @@ def build_table(pages_data: list[dict]) -> list[dict]:
             # simbolo "~": continuação sem obs extra nem novo fogo
 
             for pessoa in grupo.get("pessoas", []):
-                obs_pessoa = (pessoa.get("observacoes") or "").strip()
+                obs_pessoa  = (pessoa.get("observacoes") or "").strip()
+                parentesco  = (pessoa.get("parentesco") or "").strip()
+                sexo        = (pessoa.get("sexo") or "").strip()
+
+                # "oficial" não é grau de parentesco — vai para observacoes.
+                # Para mulheres, f.al é leitura errada de f.ª (filha).
+                if parentesco == "oficial":
+                    if sexo == "F":
+                        parentesco = "filha"
+                    else:
+                        parentesco = "outro"
+                        obs_pessoa = "; ".join(filter(None, ["oficial", obs_pessoa]))
+
                 obs_total  = "; ".join(filter(None, [obs_de_fogo, obs_pessoa]))
 
                 rows.append({
@@ -720,13 +754,18 @@ def build_table(pages_data: list[dict]) -> list[dict]:
                     "Lugar":          lugar_deste_fogo,
                     "NomeOriginal":   (pessoa.get("nome_original") or "").strip(),
                     "NomeAtualizado": (pessoa.get("nome_expandido") or "").strip(),
-                    "Sexo":           (pessoa.get("sexo") or "").strip(),
+                    "Sexo":           sexo,
                     "EstadoCivil":    (pessoa.get("estado_civil") or "").strip(),
-                    "Parentesco":     (pessoa.get("parentesco") or "").strip(),
+                    "Parentesco":     parentesco,
                     "Confessou":      (pessoa.get("confessou") or "").strip(),
                     "Observações":    obs_total,
                 })
                 current_id += 1
+
+        # Indicador de lugar no fim da página (após o último fogo) → aplica-se à PRÓXIMA página
+        lugar_proximo = page_data.get("lugar_proximo")
+        if lugar_proximo:
+            current_lugar = lugar_proximo.strip()
 
     # ------------------------------------------------------------------
     # Pós-processamento: corrigir "casado/a" indevido em cabeças sozinhas
@@ -739,6 +778,7 @@ def build_table(pages_data: list[dict]) -> list[dict]:
     focos_com_ausente: set[int] = {
         r["Fogo"] for r in rows
         if "ausente" in r["Observações"].lower()
+        or "preso" in r["Observações"].lower()
     }
     for r in rows:
         if (
@@ -977,6 +1017,29 @@ def main():
         print(f"\nERRO: Ficheiro de siglas não encontrado: {mapping_path}")
         return
 
+    # --- Selecção de subpasta ---
+    subpastas = sorted([d for d in input_path.iterdir() if d.is_dir()])
+    if subpastas:
+        n_root = len(list(input_path.glob("*.pdf")))
+        print(f"\nSubpastas encontradas em '{input_path}/':")
+        print(f"  [0] (raiz)  —  {n_root} PDF(s) directamente em '{input_path}/'")
+        for idx, sub in enumerate(subpastas, start=1):
+            n_pdfs = len(list(sub.glob("*.pdf")))
+            print(f"  [{idx}] {sub.name}/  —  {n_pdfs} PDF(s)")
+
+        while True:
+            escolha = input(f"\nEscolhe a pasta a processar [0-{len(subpastas)}]: ").strip()
+            if escolha.isdigit() and 0 <= int(escolha) <= len(subpastas):
+                break
+            print(f"  Opção inválida. Introduz um número entre 0 e {len(subpastas)}.")
+
+        escolha_idx = int(escolha)
+        if escolha_idx > 0:
+            input_path = subpastas[escolha_idx - 1]
+            global CHECKPOINT_FILE
+            CHECKPOINT_FILE = str(output_path / f"checkpoint_{input_path.name}.json")
+            print(f"  A processar: {input_path}/")
+
     output_path.mkdir(exist_ok=True)
 
     # --- Verificar checkpoint existente ---
@@ -1058,6 +1121,11 @@ def main():
                             current_lugar = current_lugar + " - Doutra Parte"
                         else:
                             current_lugar = lugar_novo
+
+                # Indicador de lugar no fim da página (após todos os fogos)
+                lugar_proximo = (page_data.get("lugar_proximo") or "").strip()
+                if lugar_proximo:
+                    current_lugar = lugar_proximo
 
                 all_pages_data.append(page_data)
                 processed_list.append({"ficheiro": pdf_nome, "pagina": i})

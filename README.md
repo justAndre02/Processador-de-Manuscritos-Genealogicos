@@ -21,14 +21,20 @@ TranscriçãoDeManuscritos/
 ├── requirements.txt           # Dependências Python
 ├── siglas_genealogicas.csv    # Tabela de abreviaturas e siglas históricas (135 entradas)
 ├── manuscritos/               # Pasta de entrada — PDFs a processar
-│   ├── Rol - 1790-2.pdf
-│   ├── Rol - 1790-3.pdf
-│   └── ...
-└── saida/                     # Pasta de saída — resultados gerados automaticamente
+│   ├── 1790/                  # Subpasta por ano (opcional)
+│   │   ├── Rol - 1790-2.pdf
+│   │   ├── Rol - 1790-3.pdf
+│   │   └── ...
+│   |── 1791/
+│   |   ├── Rol - 1791-1.pdf
+│   |   └── ...
+|   └── ..../
+└── saida/                                # Pasta de saída — resultados gerados automaticamente
     ├── resultados_YYYYMMDD_HHMM.csv
     ├── resultados_YYYYMMDD_HHMM.md
     ├── dados_brutos_YYYYMMDD_HHMM.json
-    └── checkpoint.json        # Progresso (apagado após conclusão)
+    ├── checkpoint.json                   # Progresso para a raiz (apagado após conclusão)
+    └── checkpoint_1790.json              # Progresso por subpasta (apagado após conclusão)
 ```
 
 ---
@@ -98,10 +104,12 @@ python processar_manuscritos.py
 ### Teste rápido
 
 ```bash
-python testar_manuscritos.py                                    # testa os primeiros 5 PDFs (padrão)
-python testar_manuscritos.py 3                                  # testa os primeiros 3 PDFs
-python testar_manuscritos.py nome_do_ficheiro                   # testa um determinado ficheiro
-python testar_manuscritos.py nome_do_ficheiro nome_do_ficheiro  # testa de um dado ficheiro a outro
+python testar_manuscritos.py                        # primeiros 5 PDFs (todas as subpastas)
+python testar_manuscritos.py 3                      # primeiros 3 PDFs
+python testar_manuscritos.py 1791-3                 # PDF cujo nome contenha "1791-3"
+python testar_manuscritos.py Rol - 1791-3.pdf       # fragmentos unidos automaticamente
+python testar_manuscritos.py 1791/Rol - 1791-3.pdf  # filtro por subpasta/nome
+python testar_manuscritos.py 1791-15 1791-16        # dois PDFs específicos
 ```
 
 O script de teste mostra no terminal, para cada página, os fogos e pessoas identificados com toda a informação extraída, e guarda os resultados em `saida/teste/`.

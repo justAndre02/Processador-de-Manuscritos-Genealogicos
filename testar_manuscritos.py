@@ -7,12 +7,16 @@ Processa apenas as primeiras N páginas e mostra o output detalhado
 (JSON bruto do Gemini + tabela final) para validar o prompt e o
 mapeamento antes de correr o processamento completo.
 
+A pesquisa de PDFs é recursiva: procura em manuscritos/ e em todas
+as subpastas (ex: manuscritos/1790/, manuscritos/1791/, etc.).
+
 Uso:
-    python testar_manuscritos.py                     # primeiros 5 PDFs
-    python testar_manuscritos.py 3                   # primeiros 3 PDFs
-    python testar_manuscritos.py 1790-8              # PDF cujo nome contenha "1790-8"
-    python testar_manuscritos.py Rol - 1790-8.pdf    # fragmentos unidos automaticamente
-    python testar_manuscritos.py 1790-15 1790-16     # dois PDFs específicos
+    python testar_manuscritos.py                        # primeiros 5 PDFs (todas as subpastas)
+    python testar_manuscritos.py 3                      # primeiros 3 PDFs
+    python testar_manuscritos.py 1791-3                 # PDF cujo nome contenha "1791-3"
+    python testar_manuscritos.py Rol - 1791-3.pdf       # fragmentos unidos automaticamente
+    python testar_manuscritos.py 1971/Rol - 1791-3.pdf  # filtro por subpasta/nome
+    python testar_manuscritos.py 1791-15 1791-16        # dois PDFs específicos
 """
 
 import sys
@@ -118,22 +122,31 @@ def main():
     print(f"  Modelo: {GEMINI_MODEL}\n")
 
     # Seleccionar PDFs
-    todos_pdfs = sorted(input_path.glob("*.pdf"), key=natural_sort_key)
+    todos_pdfs = sorted(input_path.glob("**/*.pdf"), key=natural_sort_key)
     if FILTRO_NOMES:
         # Tenta primeiro com todos os fragmentos unidos (lida com espaços no nome)
         joined = " ".join(FILTRO_NOMES)
-        pdf_files = [f for f in todos_pdfs if joined.lower() in f.name.lower()]
+        # Compara contra o nome do ficheiro E contra o caminho relativo (suporta "1971/Rol...")
+        pdf_files = [
+            f for f in todos_pdfs
+            if joined.lower() in f.name.lower()
+            or joined.lower() in str(f.relative_to(input_path)).lower()
+        ]
         # Se não houver correspondência, trata cada fragmento como identificador separado
         if not pdf_files:
             pdf_files = [
                 f for f in todos_pdfs
-                if any(frag.lower() in f.name.lower() for frag in FILTRO_NOMES)
+                if any(
+                    frag.lower() in f.name.lower()
+                    or frag.lower() in str(f.relative_to(input_path)).lower()
+                    for frag in FILTRO_NOMES
+                )
             ]
         if not pdf_files:
             print(f"ERRO: Nenhum PDF encontrado com os filtros: {', '.join(FILTRO_NOMES)}")
             print("PDFs disponíveis:")
             for f in todos_pdfs:
-                print(f"  • {f.name}")
+                print(f"  • {f.relative_to(input_path)}")
             return
     else:
         pdf_files = todos_pdfs[:LIMITE_PDFS]
@@ -142,7 +155,7 @@ def main():
             return
     print(f"PDFs seleccionados para teste ({len(pdf_files)}):")
     for f in pdf_files:
-        print(f"  • {f.name}")
+        print(f"  • {f.relative_to(input_path)}")
 
     # Processar
     all_pages_data = []

@@ -25,7 +25,7 @@ Ign.o,Inácio,nomes próprios,nome próprio,registos antigos,Arcaísmo
 D. / D.ª / D.n,Dom / Dona,tratamentos/títulos,tratamento honorífico,assinaturas,Tratamento nobre
 Fr. / Fri.,Frei,tratamentos/títulos,título religioso,registos conventuais,Variante frade
 oP.e / P.e,Padre,tratamentos/títulos,título religioso,assento paroquial,Usado em cabeçalhos
-R.do,Reverendo,tratamentos/títulos,título religioso,documentos eclesiásticos,Abrev. reverendo
+oR.do / R.do,o Reverendo / Reverendo,tratamentos/títulos,título religioso,documentos eclesiásticos,oR.do inclui o artigo "o"; vai para o nome expandido
 D.or / Dr.,Doutor,tratamentos/títulos,título académico,documentos jurídicos,Notariais
 serv. / serva,servo / serva,termos administrativos,status social,"""Manuel, servo de …""",escravo
 subjecto / subjecta,subjecto,termos administrativos,escravo (latim),documentos coloniais,forma latinizada
@@ -39,7 +39,7 @@ Sz.ª,Sousa,apelidos,apelido,"""Manuel Sz.ª""",z indica Sousa
 Glz / Gliz,Gonçalves,apelidos,apelido,"""Manuel Glz.""",comum séc. XVIII
 Roiz / Riz,Rodrigues,apelidos,apelido,"""João Roiz""",-iz indica Rodrigues
 R.o,Rodrigo,nomes próprios,nome,"""R.o Pereira""",abreviado
-Rib.ro / Rib.,Ribeiro,apelidos,apelido,"""António Rib.ro""",forma clara
+Rib.ro / Rib. / Ribr.o,Ribeiro,apelidos,apelido,"""António Rib.ro""",forma clara
 P.ra / P.ª / Pr.ª / Pr.a,Pereira,apelidos,apelido,"""João P.ra"" / ""Anna Pr.ª""",muito frequente; Pr.ª é variante comum nestes registos
 Vas.cos,Vasconcelos,apelidos,apelido,"""João Vas.cos""",encurtamento
 Fon.ca,Fonseca,apelidos,apelido,"""Maria Fon.ca""",abreviação comum
@@ -47,9 +47,12 @@ Daºseca,da Fonseca,apelidos,apelido,"""António Daºseca""",º representa 'o'
 a.,ano,meses/datas,idade,"""1 a.""",idade
 m.º,mês,meses/datas,data,"""m.º de Março""",contexto necessário
 p.ro,primeiro,meses/datas,data/ordem,"""p.ro de Janeiro""",ordinal
+pr.a / prim.a,primeira,meses/datas,ordinal feminino,"""pr.a Ten.ca""",feminino de p.ro; aparece combinado com Ten.ca
+Ten.ca / Tença,Tença,observações,renda ou pensão anual (eclesiástica ou civil),rol de confessados séc. XVIII,"vai para Observações; aparece combinado com pr.a → ""primeira tença"""
 jur.,juramento,termos administrativos,acto legal,escrituras,notarial
 proc.,procuração / processo,termos administrativos,documento,notariais,contexto
 cap. / cap.t,capitão,tratamentos/títulos,título militar,documentos militares,profissão
+Capp.am / oCapp.am,Capitão,tratamentos/títulos,título militar,rol de confessados séc. XVIII,oCapp.am inclui o artigo "o"; vai para a coluna Observações
 mol.,moleiro,termos administrativos,profissão,"""João, mol.""",profissão
 oleiro / olei.ro,oleiro,termos administrativos,profissão,"""Francisco oleiro""",pode abreviar
 cr.o / cr.ª,criado / criada,termos administrativos,servente doméstico,"""Miguel cr.o""",criado doméstico
@@ -69,6 +72,7 @@ Mart.o,Martinho,nomes próprios,nome próprio,lista de abreviaturas (compilaçã
 Xp.to / Xp.vão / X.vao / Xp.am / Xpto.vam,Cristo / Cristovão / Cristãos,termos religiosos,nomes religiosos/abreviação de Cristo,lista de abreviaturas (compilação),sinais xar e p — usados em fórmulas religiosas
 7bro / 8bro / 9bro / 10bro,Setembro / Outubro / Novembro / Dezembro,meses/datas,meses (datas),lista de abreviaturas (compilação),notação retrograda para meses com -bro
 L.do,Licenciado,tratamentos/títulos,título académico,lista de abreviaturas (compilação),usado em ofícios e entradas notariais
+oL.do, o Licenciado,tratamentos/títulos,título académico,lista de abreviaturas (compilação),variante com artigo "o"
 Dez.or,Desembargador,tratamentos/títulos,cargo/judicial,lista de abreviaturas (compilação),título jurídico alto
 S.bam / Seb.am,Sebastião,nomes próprios,nome próprio,lista de abreviaturas (compilação),forma contraída de Sebastião
 Miz.ª,Misericórdia,termos religiosos,referência de irmandade/obra,lista de abreviaturas (compilação),aparece em notas de confrarias
@@ -136,8 +140,9 @@ Feitor,administrador / rendeiro / caseiro,termos administrativos,profissão,regi
 Cordoeiro,fabricante de cordas,termos administrativos,profissão,registos paroquiais séc. XVII-XVIII,o que faz cordas (Dict. 1848)
 Cerieiro,negociante ou trabalhador em cera,termos administrativos,profissão,registos paroquiais séc. XVII-XVIII,pessoa que trabalha ou negoceia em cera
 Estanqueiro,vendedor de tabaco / monopolista,termos administrativos,profissão,registos paroquiais séc. XVII-XVIII,tem loja de tabaco ou estanco de mercadoria (Dict. 1848)
-f.al,oficial,parentesco,Oficial / trabalhador do fogo (equivalente a criado / servo),rol de confessados séc. XVIII,vai para a coluna Parentesco; não confundir com 'fora de alimento'
+f.al,oficial,parentesco,Trabalhador do fogo — apenas para homens; para mulheres interpretar como f.ª (filha),rol de confessados séc. XVIII,"homem: parentesco=outro, observações=oficial; mulher: parentesco=filha (leitura errada de f.ª)"
 sp. / sep.,separada,observações,estado de separação conjugal,rol de confessados séc. XVIII,vai para a coluna Observações; EstadoCivil mantém-se casado/a
+inmino. / in mino. / in min.,in minoribus,termos religiosos,estado clerical — recebeu ordens menores mas não foi ordenado sacerdote,rol de confessados séc. XVIII,vai para a coluna Observações como "in minoribus"
 Lopez / Lop.,Lopes,apelidos,apelido português comum,"""Manoel Lopez""","grafia arcaica de Lopes; o L cursivo pode ser lido erroneamente como C (''Copey'')"
 cund. / cunh. / cund.ª / cunh.ª,cunhado / cunhada,parentesco,grau de parentesco por afinidade,"""Roza M.ª cund.ª""",vai para o campo Observações quando a pessoa é cabeça de sub-fogo (//)
 Thomaz / Thom.z / Thomay,Tomás,nomes próprios,nome próprio,registos paroquiais séc. XVII-XVIII,terminações -az / -z / -ay indicam Tomás (o y cursivo é variante de z); NÃO confundir com Thomé (terminação -é / -e)
@@ -151,3 +156,6 @@ Escudr.o / Escudr.º / Ecudr.º / Escudro,Escudeiro,termos administrativos,títu
 de Eça / d'Eça / D'Eça / deEça,de Eça,apelidos,apelido nobre,registos paroquiais séc. XVII-XVIII,"apelido por extenso; E cursivo pode parecer B tornando 'Eça' em 'Beca' (B←→E confusão); se leres 'de Beca' ou 'dBeca' após D./D.ª reconsidera 'de Eça'"
 da Luz / daLuz / d'Luz,da Luz,apelidos,apelido de devoção mariana,registos paroquiais séc. XVII-XVIII,"apelido; NUNCA confundir com nome próprio Luísa/Luís — 'daLuz' ou 'd.Luz' após nome próprio é SEMPRE o apelido 'da Luz' (ex: 'Maria daLuz' → nome_expandido='Maria da Luz')"
 Montr. / Montr.o / Mont.ro,Monteiro,apelidos,apelido,registos paroquiais séc. XVII-XVIII,apelido frequente; forma abreviada de Monteiro
+deSacramento / de Sacram.,de Sacramento,apelidos,apelido de devoção religiosa,registos paroquiais séc. XVII-XVIII,"apelido; NUNCA confundir com nome próprio Sacramento — 'deSacramento' ou 'de Sacram.' após nome próprio é SEMPRE o apelido 'de Sacramento' (ex: 'Maria deSacramento' → nome_expandido='Maria de Sacramento')"
+dos Santos / dosSantos,dos Santos,apelidos,apelido de devoção religiosa,registos paroquiais séc. XVII-XVIII,"apelido; NUNCA confundir com nome próprio Santos — 'dosSantos' ou 'dos Santos' após nome próprio é SEMPRE o apelido 'dos Santos' (ex: 'João dosSantos' → nome_expandido='João dos Santos')"
+oBn.do, o Beneficiado,o Beneficiado,tratamentos/títulos,título eclesiástico,registos de casamento e óbito séc. XVII-XVIII,"variante de Beneficiado; oB = o Ben+e+ficiado contraído"
