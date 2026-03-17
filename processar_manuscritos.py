@@ -313,7 +313,7 @@ válido com a estrutura seguinte (sem texto antes ou depois, sem blocos de códi
           "nome_expandido": "APENAS o nome próprio e apelido com abreviaturas do nome expandidas — SEM palavras de papel ou estado civil",
           "sexo": "M ou F",
           "estado_civil": "casado | casada | solteiro | solteira | viúvo | viúva | desconhecido",
-          "parentesco": "cabeça | mulher | filho | filha | irmão | irmã | primo | prima | criado | criada | oficial | servo | serva | neto | neta | sobrinho | sobrinha | outro | desconhecido",
+                    "parentesco": "cabeça | mulher | filho | filha | irmão | irmã | primo | prima | criado | criada | oficial | servo | serva | neto | neta | sobrinho | sobrinha | sogro | sogra | genro | nora | cunhado | cunhada | tio | tia | avô | avó | pai | mãe | outro | desconhecido",
           "confessou": "sim | não | ilegível",
           "observacoes": "notas relevantes separadas por vírgula, vazio se não houver"
         }}
@@ -417,7 +417,11 @@ Exemplos: `"Tereza Barbara S.a"` → `nome_expandido="Teresa Bárbara"`, `estado
 tem SEMPRE parentesco "cabeça" (é chefe do seu sub-agregado). \
 **Se aparecer explicitamente um grau de parentesco relativo ao fogo `#` principal** \
 (ex: "Sogro", "Sogra", "Genro", "Nora", "Cunhado", "Cunhada", `cund.`/`cunh.`/`cund.ª`/`cunh.ª`, "Tio", "Avô", etc.), \
-coloca esse termo expandido em `observacoes` — o `parentesco` mantém-se "cabeça". \
+coloca esse termo expandido em `parentesco` (não em `observacoes`). \
+A regra anterior aplica-se APENAS quando a pessoa é a cabeça de um sub-fogo `//`; \
+nesse caso mantém `parentesco="cabeça"` e coloca o grau em `observacoes`. \
+Se o termo (ex: "sogra") aparecer num membro do MESMO fogo (sem `//` na linha), \
+usa directamente `parentesco="sogra"` (ou equivalente) e NÃO repitas em `observacoes`. \
 A observação "sub-fogo do fogo N" é gerada automaticamente pelo sistema. \
 **CRÍTICO — `cunh.`/`cund.` indica SEMPRE sub-fogo (`//`)**: `cunh.`/`cund.`/`cunh.ª`/`cund.ª` \
 (cunhado/cunhada) junto a um nome em início de linha pressupõe OBRIGATORIAMENTE um marcador `//` \
@@ -811,6 +815,34 @@ def build_table(pages_data: list[dict]) -> list[dict]:
                 and r["Fogo"] not in focos_com_ausente
             ):
                 r["EstadoCivil"] = "viúva" if r["Sexo"] == "F" else "viúvo"
+
+    # ------------------------------------------------------------------
+    # Pós-processamento: parentesco explícito escrito nas observações
+    # Quando o modelo coloca graus de parentesco (sogra, sogro, genro, etc.)
+    # em Observações para membros do mesmo fogo, mover para Parentesco.
+    # ------------------------------------------------------------------
+    _parentesco_expressoes = [
+        "sogro", "sogra", "genro", "nora", "cunhado", "cunhada",
+        "tio", "tia", "avô", "avó", "pai", "mãe",
+    ]
+    _parentesco_re = re.compile(r"\b(" + "|".join(_parentesco_expressoes) + r")\b", re.IGNORECASE)
+    for r in rows:
+        # Preservar cabeças de sub-fogo: nestes casos o grau pode ficar em observações.
+        if r["Parentesco"] == "cabeça":
+            continue
+
+        m = _parentesco_re.search(r["Observações"])
+        if not m:
+            continue
+
+        termo = m.group(1).lower()
+        if r["Parentesco"] in ("", "desconhecido", "outro"):
+            r["Parentesco"] = termo
+            # Remove o termo das observações e limpa separadores sobrantes.
+            obs = _parentesco_re.sub("", r["Observações"])
+            obs = re.sub(r"\s*;\s*;\s*", "; ", obs)
+            obs = re.sub(r"^\s*;\s*|\s*;\s*$", "", obs).strip()
+            r["Observações"] = obs
 
     # ------------------------------------------------------------------
     # Pós-processamento: resolver cadeia de sub-fogos
