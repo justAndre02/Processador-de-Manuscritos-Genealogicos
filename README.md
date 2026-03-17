@@ -78,11 +78,11 @@ A chave nunca é incluída no repositório — o ficheiro `.env` está listado n
 Edita as constantes no topo de `processar_manuscritos.py`:
 
 ```python
-GEMINI_MODEL        = "gemini-3.1-flash-lite-preview"  # confirmar nome actual em aistudio.google.com
-INPUT_FOLDER        = "manuscritos"                    # pasta com os PDFs
-OUTPUT_FOLDER       = "saida"                          # pasta para os resultados
-PDF_DPI             = 200                              # resolução de conversão
-DELAY_ENTRE_PEDIDOS = 4                           # segundos entre pedidos à API
+GEMINI_MODEL        = "gemini-3.1-flash-lite-preview"     # confirmar nome actual em aistudio.google.com
+INPUT_FOLDER        = "manuscritos"                       # pasta com os PDFs
+OUTPUT_FOLDER       = "saida"                             # pasta para os resultados
+PDF_DPI             = 200                                 # resolução de conversão
+DELAY_ENTRE_PEDIDOS = 4                                   # segundos entre pedidos à API
 ```
 
 ---
@@ -95,11 +95,13 @@ DELAY_ENTRE_PEDIDOS = 4                           # segundos entre pedidos à AP
 python processar_manuscritos.py
 ```
 
-### Teste rápido (primeiros N PDFs)
+### Teste rápido
 
 ```bash
-python testar_manuscritos.py        # testa os primeiros 5 PDFs (padrão)
-python testar_manuscritos.py 3      # testa os primeiros 3 PDFs
+python testar_manuscritos.py                                    # testa os primeiros 5 PDFs (padrão)
+python testar_manuscritos.py 3                                  # testa os primeiros 3 PDFs
+python testar_manuscritos.py nome_do_ficheiro                   # testa um determinado ficheiro
+python testar_manuscritos.py nome_do_ficheiro nome_do_ficheiro  # testa de um dado ficheiro a outro
 ```
 
 O script de teste mostra no terminal, para cada página, os fogos e pessoas identificados com toda a informação extraída, e guarda os resultados em `saida/teste/`.
@@ -183,14 +185,11 @@ Esta tabela é injectada no prompt enviado ao modelo e pode ser expandida à med
 
 ## Gestão de limites da API (tier gratuito)
 
-O tier gratuito do Google AI Studio permite **20 pedidos por dia** por modelo. O sistema lida com este limite de forma automática:
-
 - **Pausa entre pedidos** — espera configurável entre chamadas à API (`DELAY_ENTRE_PEDIDOS`)
 - **Retry inteligente** — em caso de erro 429 (rate limit), lê o tempo de espera sugerido pela API e aguarda exactamente esse tempo antes de tentar novamente
 - **Checkpoint automático** — após cada página processada, o progresso é guardado em `saida/checkpoint.json`; se a quota diária for atingida, o script pára graciosamente e exporta os resultados parciais com sufixo `_parcial`
 - **Retoma automática** — ao correr o script novamente, detecta o checkpoint e pergunta se deve retomar de onde ficou, saltando as páginas já processadas
 
-Com 73 páginas e um limite de 20 pedidos/dia, o processamento completo demora cerca de **4 sessões**.
 
 ---
 
