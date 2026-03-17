@@ -77,8 +77,6 @@ Edita `.env`:
 GEMINI_API_KEY=a_tua_chave_aqui
 ```
 
-A chave nunca é incluída no repositório — o ficheiro `.env` está listado no `.gitignore`.
-
 ### 2. Restantes opções
 
 Edita as constantes no topo de `processar_manuscritos.py`:
@@ -134,7 +132,7 @@ O resultado principal é uma tabela com uma linha por pessoa, com as seguintes c
 | **Observações** | Associação de sub-fogos, separada (sp.), mentecapto, cego, forasteiro, etc. |
 
 São gerados três ficheiros por execução:
-- **`.csv`** — separado por `;`, encoding UTF-8 BOM (abre directamente no Excel)
+- **`.csv`** — separado por `;`, encoding UTF-8 BOM
 - **`.md`** — tabela em formato Markdown
 - **`.json`** — resposta bruta do modelo, útil para depuração e reprocessamento
 
