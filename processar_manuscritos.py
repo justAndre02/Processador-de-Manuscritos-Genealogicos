@@ -232,7 +232,7 @@ usa `parentesco="outro"`); \
 **REGRA CRÍTICA**: se `f.al` aparecer após um nome **feminino** (sexo=F), NÃO é "oficial" — \
 é quase sempre uma leitura errada de `f.ª` (filha); usa `parentesco="filha"` e **não** colocas nada em `observacoes`; \
 se a linha tiver `//`, vai para `observacoes` e `parentesco = "cabeça"`); \
-sobr.º/sobr.ª = sobrinho/sobrinha; serv./servo/serva = servo/serva; etc. \
+sobr.º/sobr.ª/sobr.o/sobr.a = sobrinho/sobrinha; afilh.º/afilh.ª/afilh.o/afilh.a = afilhado/afilhada; serv./servo/serva = servo/serva; etc. \
 **ATENÇÃO paleográfica — `Ir.` vs `Sz.`**: nestes manuscritos o `I` cursivo assemelha-se a um `S` \
 e o `r` cursivo pode parecer `z`, fazendo com que `Ir.` (irmão) seja lido como `Sz.` (Sousa). \
 **Regra contextual obrigatória**: os membros de um fogo partilham o apelido da cabeça. \
@@ -254,6 +254,9 @@ Exemplo concreto: a linha **"João da Costa f.° caz. Sep."** deve produzir \
 5. **Abreviaturas de estado civil** que aparecem depois do nome (não fazem parte do nome): \
 cas./caz./cass. = casado/a; S.º/soltr./solt. = solteiro/a; \
 viu./viu.o/viuva/V.o/V.º/V.°/V.a/V.ª = viúvo/viúva. \
+**ATENÇÃO — `Vr.a` / `Vr.ª` / `V.ra` são apelido `Vieira` (nome), NÃO estado civil**: \
+se o token tiver `r` depois do `V`, trata como apelido e expande para `"Vieira"` no nome, \
+nunca para `estado_civil="viúvo/viúva"`. \
 **ATENÇÃO — `S.ª`/`S.a` são ambíguas** (distingue pela preposição que as precede): \
 — Com `da`/`de`/`dos`/`das` imediatamente antes (ex: `da S.ª`, `da S.a`) = apelido **Silva** → faz parte do nome; nunca é estado civil neste caso. \
 — **SEM preposição antes** (ex: `"Luiza Maria S.a"`, `"Tereza Barbara S.a"`) = **solteira** → estado civil; \
@@ -285,7 +288,7 @@ se leste "Cicrava" ou forma semelhante, é SEMPRE "Escrava".
 7. **Sequências de abreviaturas junto ao nome**: quando várias abreviaturas aparecem \
 consecutivamente após o nome (ex: `sobr.º V.º F.`), analisa cada uma independentemente \
 e preenche o campo correcto para cada: \
-`sobr.º`/`sobr.ª` = parentesco **sobrinho/sobrinha**; \
+`sobr.º`/`sobr.ª`/`sobr.o`/`sobr.a` = parentesco **sobrinho/sobrinha**; \
 `V.º`/`V.ª`/`V.o`/`V.a` = estado civil **viúvo/viúva**; \
 `F.` (acima ou junto) = **falecido/falecida** em `observacoes`. \
 Exemplo: `"Bernardo Boa Ventura sobr.º V.º F."` → \
@@ -317,7 +320,7 @@ válido com a estrutura seguinte (sem texto antes ou depois, sem blocos de códi
           "nome_expandido": "APENAS o nome próprio e apelido com abreviaturas do nome expandidas — SEM palavras de papel ou estado civil",
           "sexo": "M ou F",
           "estado_civil": "casado | casada | solteiro | solteira | viúvo | viúva | desconhecido",
-                    "parentesco": "cabeça | mulher | filho | filha | irmão | irmã | primo | prima | criado | criada | servo | serva | neto | neta | sobrinho | sobrinha | sogro | sogra | genro | nora | cunhado | cunhada | tio | tia | avô | avó | pai | mãe | outro | desconhecido",
+                    "parentesco": "cabeça | mulher | filho | filha | irmão | irmã | primo | prima | criado | criada | servo | serva | neto | neta | sobrinho | sobrinha | afilhado | afilhada | sogro | sogra | genro | nora | cunhado | cunhada | tio | tia | avô | avó | pai | mãe | outro | desconhecido",
           "confessou": "sim | não | ilegível",
           "observacoes": "notas relevantes separadas por vírgula, vazio se não houver"
         }}
@@ -375,6 +378,10 @@ parte do nome e DEVE ser incluído em `nome_original` e expandido para "Peixoto"
 Nunca o interpretes como parentesco, estado civil ou outro campo. \
 **Nomes com `D.`/`D.ª` (Dom/Dona) — lê o nome completo**: pessoas com prefixo honorífico \
 `D.` ou `D.ª` têm frequentemente dois ou três nomes próprios e/ou apelido (ex: `"D. Anna M.a Leonor"`). \
+**Excepção obrigatória**: `D.or` / `Dr.` / `oD.or` / `Dor` = **Doutor** (título) e NUNCA faz parte do nome; \
+nestes casos remove o título do nome e coloca `"Doutor"` em `observacoes`. \
+**NUNCA omitas este marcador inicial**: se existir um token antes do nome com forma próxima de `Dor`/`D.or`/`Dr`, \
+regista obrigatoriamente `"Doutor"` em `observacoes`, mesmo quando o `D` parece um `o` ligado.
 Lê TODAS as palavras antes do primeiro marcador de parentesco (`fa.`/`f.ª`, `f.º`, `m.er`, `cr.`, etc.) \
 ou estado civil (`S.ª`, `cas.`, `V.ª`, etc.) como parte do nome — \
 NUNCA interrompas a leitura do nome ao encontrar uma palavra que parece um nome isolado. \
@@ -441,7 +448,11 @@ afecta nem altera o estado civil — vai apenas para `observacoes`. \
 4. `f.al` após um nome **masculino** (sexo=M) = o membro é um trabalhador do fogo ("oficial"); \
 coloca `"oficial"` em `observacoes` e usa `parentesco="outro"` (não é um grau de parentesco). \
 `f.al` após um nome **feminino** (sexo=F) = leitura errada de `f.ª` → `parentesco="filha"`, \
-nada em `observacoes`.
+nada em `observacoes`. \
+**CRÍTICO — NUNCA inferir "oficial" por aproximação**: só usa `"oficial"` quando leres \
+explicitamente `f.al` (ou variante paleográfica inequívoca da mesma sigla). \
+`Comp.o` = **companheiro** (vai para `observacoes` como `"companheiro"`, NÃO oficial). \
+`Caixr.o`/`Caixr`/`Caxr.o` = **caixeiro** (vai para `observacoes` como `"caixeiro"`, NÃO oficial).
 5. `sp.` / `Sep.` / `sep.` / `Se.p` / `se.p` após um nome = a pessoa está separada → \
 coloca **"separado"** (se `sexo` = M) ou **"separada"** (se `sexo` = F) em `observacoes`; \
 o `estado_civil` mantém-se normalmente "casado/a".
@@ -452,7 +463,7 @@ o `estado_civil` mantém-se normalmente "casado/a".
    Em todos estes casos, `estado_civil` mantém-se "casado/a".
 6. **Estado civil por omissão**: se o estado civil não estiver explicitamente indicado \
 no manuscrito, aplica esta regra:
-   - Parentesco **filho, filha, irmão, irmã, criado, criada, servo, serva, neto, neta, sobrinho, sobrinha** \
+   - Parentesco **filho, filha, irmão, irmã, criado, criada, servo, serva, neto, neta, sobrinho, sobrinha, afilhado, afilhada** \
 → assume `"solteiro"` ou `"solteira"` conforme o sexo.
    - Se a **cabeça masculina** for seguida de uma pessoa com parentesco **"mulher"** no mesmo fogo, \
 ambos têm `estado_civil` **"casado"** e **"casada"** respectivamente, **mas APENAS se a cabeça \
@@ -522,6 +533,12 @@ antes de um nome, coloca `"Licenciado"` em `observacoes` — **nunca omitas este
 Não faz parte do `nome_original` nem do `nome_expandido`. O artigo `o` antes de `L.do` \
 (ex: `o L.do Luis Manoel`) é simplesmente "o Licenciado" — trata da mesma forma. \
 Exemplo: `# oL.do Luis Manoel de Alpoem` → `nome_original="Luis Manoel de Alpoem"`, `observacoes="Licenciado"`.
+7ea. **`D.or` / `Dr.` / `oD.or` / `Dor` (Doutor)**: quando estas formas aparecerem antes de um nome, \
+coloca `"Doutor"` em `observacoes` — **nunca omitas este marcador**. \
+Não faz parte do `nome_original` nem do `nome_expandido`. O artigo `o` em `oD.or` é apenas \
+o artigo ("o Doutor"), não entra no nome. \
+Exemplo: `# oD.or Bento Iozé de Moura` → `nome_original="Bento Iozé de Moura"`, \
+`nome_expandido="Bento José de Moura"`, `observacoes="Doutor"`.
 7f. **`Conego` / `Cónego` / `Can.go` / `Con.go` / `Can.º` (Cónego — Cânone)**: quando esta \
 palavra ou abreviatura aparecer antes de um nome, coloca `"Cónego"` em `observacoes` — \
 **NUNCA a incluas em `nome_original` nem `nome_expandido`**, nem como parte do nome próprio. \
@@ -684,6 +701,7 @@ def build_table(pages_data: list[dict]) -> list[dict]:
     current_lugar = ""
     last_hash_fogo = None   # número de fogo do último # encontrado
     fogo_parent: dict[int, int] = {}  # sub-fogo → fogo # pai (para chain resolution)
+    _f_al_re = re.compile(r"(?<!\w)f\.?\s*al\.?(?!\w)", re.IGNORECASE)
 
     for page_data in pages_data:
         # Guardar o lugar em vigor antes desta página, para os grupos ~ de continuação.
@@ -736,6 +754,9 @@ def build_table(pages_data: list[dict]) -> list[dict]:
                 obs_pessoa  = (pessoa.get("observacoes") or "").strip()
                 parentesco  = (pessoa.get("parentesco") or "").strip()
                 sexo        = (pessoa.get("sexo") or "").strip()
+                nome_original = (pessoa.get("nome_original") or "").strip()
+                nome_expandido = (pessoa.get("nome_expandido") or "").strip()
+                tem_f_al = bool(_f_al_re.search(" ".join([nome_original, nome_expandido, obs_pessoa])))
 
                 # "oficial" não é grau de parentesco — vai para observacoes.
                 # Para mulheres, f.al é leitura errada de f.ª (filha).
@@ -744,7 +765,13 @@ def build_table(pages_data: list[dict]) -> list[dict]:
                         parentesco = "filha"
                     else:
                         parentesco = "outro"
-                        obs_pessoa = "; ".join(filter(None, ["oficial", obs_pessoa]))
+                        if tem_f_al and "oficial" not in obs_pessoa.lower():
+                            obs_pessoa = "; ".join(filter(None, ["oficial", obs_pessoa]))
+                elif "oficial" in obs_pessoa.lower() and not tem_f_al:
+                    # Evita "oficial" sem evidência textual explícita de f.al.
+                    obs_pessoa = re.sub(r"(?i)\boficial\b", "", obs_pessoa)
+                    obs_pessoa = re.sub(r"\s*;\s*;\s*", "; ", obs_pessoa)
+                    obs_pessoa = re.sub(r"^\s*;\s*|\s*;\s*$", "", obs_pessoa).strip()
 
                 obs_total  = "; ".join(filter(None, [obs_de_fogo, obs_pessoa]))
 
@@ -752,8 +779,8 @@ def build_table(pages_data: list[dict]) -> list[dict]:
                     "Id":             current_id,
                     "Fogo":           current_fogo,
                     "Lugar":          lugar_deste_fogo,
-                    "NomeOriginal":   (pessoa.get("nome_original") or "").strip(),
-                    "NomeAtualizado": (pessoa.get("nome_expandido") or "").strip(),
+                    "NomeOriginal":   nome_original,
+                    "NomeAtualizado": nome_expandido,
                     "Sexo":           sexo,
                     "EstadoCivil":    (pessoa.get("estado_civil") or "").strip(),
                     "Parentesco":     parentesco,
@@ -790,6 +817,28 @@ def build_table(pages_data: list[dict]) -> list[dict]:
             r["EstadoCivil"] = "viúva" if r["Sexo"] == "F" else "viúvo"
 
     # ------------------------------------------------------------------
+    # Pós-processamento: Vr.a/Vr.ª (Vieira) lido como viúvo no nome/estado
+    # Quando o cabeça tem "mulher" no mesmo fogo, não pode ficar viúvo por
+    # confusão de apelido. Corrige "Viúvo/Viúva" no nome para "Vieira".
+    # ------------------------------------------------------------------
+    _vr_sigla_orig_pat = re.compile(r"\bVr\.?\s*[aªoº]\b", re.IGNORECASE)
+    _viuvo_nome_pat = re.compile(r"\bVi[uú]v[oa]\b", re.IGNORECASE)
+    for r in rows:
+        has_vr_sigla = bool(_vr_sigla_orig_pat.search(r["NomeOriginal"]))
+        has_viuvo_no_nome = bool(_viuvo_nome_pat.search(r["NomeAtualizado"]))
+        if has_vr_sigla and has_viuvo_no_nome:
+            r["NomeAtualizado"] = _viuvo_nome_pat.sub("Vieira", r["NomeAtualizado"])
+
+        if (
+            r["Parentesco"] == "cabeça"
+            and r["Fogo"] in focos_com_mulher
+            and r["EstadoCivil"] in ("viúvo", "viúva")
+            and has_viuvo_no_nome
+        ):
+            r["NomeAtualizado"] = _viuvo_nome_pat.sub("Vieira", r["NomeAtualizado"])
+            r["EstadoCivil"] = "casada" if r["Sexo"] == "F" else "casado"
+
+    # ------------------------------------------------------------------
     # Pós-processamento: D.M. na posição de confissão → Padre
     # D.M. é marcador consistente de padre; o modelo frequentemente lê
     # "o P.e" como "D." (Dom/Dona) e não identifica a pessoa como padre.
@@ -813,6 +862,24 @@ def build_table(pages_data: list[dict]) -> list[dict]:
                 "prima": "primo",
             }
             r["Parentesco"] = _fem_to_masc.get(r["Parentesco"], r["Parentesco"])
+
+    # ------------------------------------------------------------------
+    # Pós-processamento: D.or/Dr./oD.or no nome → Doutor em observações
+    # Títulos académicos não fazem parte do nome.
+    # ------------------------------------------------------------------
+    _doutor_prefix_orig = re.compile(r'^(?:o\s*)?D\.?\s*or\.?\s+', re.IGNORECASE)
+    _doutor_prefix_expd = re.compile(r'^(?:o\s*)?Doutor\s+', re.IGNORECASE)
+    for r in rows:
+        had_doutor_prefix = (
+            bool(_doutor_prefix_orig.search(r["NomeOriginal"]))
+            or bool(_doutor_prefix_expd.search(r["NomeAtualizado"]))
+        )
+        if not had_doutor_prefix:
+            continue
+        if "doutor" not in r["Observações"].lower():
+            r["Observações"] = "; ".join(filter(None, ["Doutor", r["Observações"]]))
+        r["NomeOriginal"] = _doutor_prefix_orig.sub("", r["NomeOriginal"]).strip()
+        r["NomeAtualizado"] = _doutor_prefix_expd.sub("", r["NomeAtualizado"]).strip()
 
     # ------------------------------------------------------------------
     # Pós-processamento: criado/criada com "casado/a" → solteiro/a
@@ -863,20 +930,34 @@ def build_table(pages_data: list[dict]) -> list[dict]:
     # ------------------------------------------------------------------
     _parentesco_expressoes = [
         "sogro", "sogra", "genro", "nora", "cunhado", "cunhada",
-        "tio", "tia", "avô", "avó", "pai", "mãe",
+        "tio", "tia", "avô", "avó", "pai", "mãe", "sobrinho", "sobrinha", "afilhado", "afilhada",
     ]
     _parentesco_re = re.compile(r"\b(" + "|".join(_parentesco_expressoes) + r")\b", re.IGNORECASE)
+    _sobr_abrev_re = re.compile(r"\bsobr\.?\s*([oaºª])\b", re.IGNORECASE)
+    _afilh_abrev_re = re.compile(r"\bafilh\.?\s*([oaºª])\b", re.IGNORECASE)
     for r in rows:
         # Preservar cabeças de sub-fogo: nestes casos o grau pode ficar em observações.
         if r["Parentesco"] == "cabeça":
             continue
+
+        # Normaliza formas abreviadas de sobrinho/a nas observações.
+        r["Observações"] = _sobr_abrev_re.sub(
+            lambda m: "sobrinha" if m.group(1).lower() in ("a", "ª") else "sobrinho",
+            r["Observações"],
+        )
+        r["Observações"] = _afilh_abrev_re.sub(
+            lambda m: "afilhada" if m.group(1).lower() in ("a", "ª") else "afilhado",
+            r["Observações"],
+        )
 
         m = _parentesco_re.search(r["Observações"])
         if not m:
             continue
 
         termo = m.group(1).lower()
-        if r["Parentesco"] in ("", "desconhecido", "outro"):
+        if r["Parentesco"] in ("", "desconhecido", "outro") or (
+            termo in ("sobrinho", "sobrinha") and r["Parentesco"] in ("filho", "filha")
+        ):
             r["Parentesco"] = termo
             # Remove o termo das observações e limpa separadores sobrantes.
             obs = _parentesco_re.sub("", r["Observações"])
@@ -1162,15 +1243,15 @@ def main():
     print(f"  Total de pessoas registadas: {len(rows)}")
 
     # --- Exportar ---
-    ts      = datetime.now().strftime("%Y%m%d_%H%M")
+    base_entrada = re.sub(r"[^0-9A-Za-z_-]+", "_", input_path.name).strip("_") or "manuscritos"
     sufixo  = "_parcial" if quota_atingida else ""
-    csv_out = output_path / f"resultados_{ts}{sufixo}.csv"
-    md_out  = output_path / f"resultados_{ts}{sufixo}.md"
+    csv_out = output_path / f"resultados_{base_entrada}{sufixo}.csv"
+    md_out  = output_path / f"resultados_{base_entrada}{sufixo}.md"
 
     export_csv(rows, str(csv_out))
     export_markdown(rows, str(md_out))
 
-    json_out = output_path / f"dados_brutos_{ts}{sufixo}.json"
+    json_out = output_path / f"resultados_{base_entrada}_bruto{sufixo}.json"
     with open(json_out, "w", encoding="utf-8") as fh:
         json.dump(all_pages_data, fh, ensure_ascii=False, indent=2)
     print(f"  JSON bruto guardado → {json_out}")
@@ -1187,4 +1268,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-

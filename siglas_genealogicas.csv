@@ -11,6 +11,7 @@ m. / ma.,mãe,parentesco,parentesco,"""Francisca, m. de João""","Raro abreviado
 f.º m. / f.ª m.,filho menor / filha menor,parentesco,menor de idade (isento de confissão),"""Catharina f.ª m.""","parentesco = filho/filha; observações = ""menor"""
 p. / pai,pai,parentesco,parentesco,"""João p. de …""",p. pode ser ambíguo
 sobr.º,sobrinho,parentesco,parentesco,"""José sobr.º""",Geralmente aparece completo
+Afilh.º / Afilh.ª / afilh.o / afilh.a,afilhado / afilhada,parentesco,parentesco,"""Maria Afilh.ª""",grau de parentesco espiritual; mapear para coluna Parentesco
 Primo / Prima,primo / prima,parentesco,parentesco,"""P.e Jozé Primo""","aparece por extenso; indica grau de parentesco cousin — não confundir com P.e (Padre)"
 viu. / viu.o / viuva,viúvo / viúva,estado civil/filiação,estado civil,"""Maria, viu.""",Também V.º
 soltra. / soltro.,solteira / solteiro,estado civil/filiação,estado civil,"""Inês soltra."" (1688)",Muito comum
@@ -27,6 +28,7 @@ Fr. / Fri.,Frei,tratamentos/títulos,título religioso,registos conventuais,Vari
 oP.e / P.e,Padre,tratamentos/títulos,título religioso,assento paroquial,Usado em cabeçalhos
 oR.do / R.do,o Reverendo / Reverendo,tratamentos/títulos,título religioso,documentos eclesiásticos,oR.do inclui o artigo "o"; vai para o nome expandido
 D.or / Dr.,Doutor,tratamentos/títulos,título académico,documentos jurídicos,Notariais
+oD.or, o Doutor,tratamentos/títulos,título académico,documentos jurídicos,Notariais,Variante com artigo "o"
 serv. / serva,servo / serva,termos administrativos,status social,"""Manuel, servo de …""",escravo
 subjecto / subjecta,subjecto,termos administrativos,escravo (latim),documentos coloniais,forma latinizada
 mor. / morador,morador,termos administrativos,residência,"""mor. da rua …""",residência local
@@ -54,6 +56,8 @@ proc.,procuração / processo,termos administrativos,documento,notariais,context
 cap. / cap.t,capitão,tratamentos/títulos,título militar,documentos militares,profissão
 Capp.am / oCapp.am,Capitão,tratamentos/títulos,título militar,rol de confessados séc. XVIII,oCapp.am inclui o artigo "o"; vai para a coluna Observações
 mol.,moleiro,termos administrativos,profissão,"""João, mol.""",profissão
+Comp.o / Comp.,companheiro,termos administrativos,profissão / condição,rol de confessados séc. XVIII,vai para Observações como "companheiro"; nunca interpretar como "oficial"
+Caixr.o / Caixr / Caxr.o,Caixeiro,termos administrativos,profissão,rol de confessados séc. XVIII,vai para Observações como "caixeiro"; nunca interpretar como "oficial"
 oleiro / olei.ro,oleiro,termos administrativos,profissão,"""Francisco oleiro""",pode abreviar
 cr.o / cr.ª,criado / criada,termos administrativos,servente doméstico,"""Miguel cr.o""",criado doméstico
 m.er / mul.,mulher,parentesco,esposa,"""Ana m.er de …""",esposa
@@ -83,6 +87,7 @@ X.er,Xavier,nomes próprios,apelido / nome próprio,lista de abreviaturas (compi
 A.o / Aff.o,Afonso,nomes próprios,nome próprio,registos paroquiais séc. XVII-XVIII,forma contraída de Afonso
 An.to / An.ta,António / Antónia,nomes próprios,nome próprio,registos paroquiais séc. XVII-XVIII,formas masc./fem. muito frequentes
 B.ar,Baltazar,nomes próprios,nome próprio,registos paroquiais séc. XVII-XVIII,abreviatura de Baltazar
+Marcoz,Marcos,nomes próprios,nome próprio,rol de confessados séc. XVIII,forma gráfica antiga de Marcos
 Bart.o / B.eu / B.meu,Bartolomeu,nomes próprios,nome próprio,registos paroquiais séc. XVII-XVIII,variantes de Bartolomeu
 B.or,Belchior,nomes próprios,nome próprio,registos paroquiais séc. XVII-XVIII,nome documentado nos registos
 C.na / C.ª,Catarina,nomes próprios,nome próprio,registos paroquiais séc. XVII-XVIII,C.ª forma muito comum
@@ -159,3 +164,4 @@ Montr. / Montr.o / Mont.ro,Monteiro,apelidos,apelido,registos paroquiais séc. X
 deSacramento / de Sacram.,de Sacramento,apelidos,apelido de devoção religiosa,registos paroquiais séc. XVII-XVIII,"apelido; NUNCA confundir com nome próprio Sacramento — 'deSacramento' ou 'de Sacram.' após nome próprio é SEMPRE o apelido 'de Sacramento' (ex: 'Maria deSacramento' → nome_expandido='Maria de Sacramento')"
 dos Santos / dosSantos,dos Santos,apelidos,apelido de devoção religiosa,registos paroquiais séc. XVII-XVIII,"apelido; NUNCA confundir com nome próprio Santos — 'dosSantos' ou 'dos Santos' após nome próprio é SEMPRE o apelido 'dos Santos' (ex: 'João dosSantos' → nome_expandido='João dos Santos')"
 oBn.do, o Beneficiado,o Beneficiado,tratamentos/títulos,título eclesiástico,registos de casamento e óbito séc. XVII-XVIII,"variante de Beneficiado; oB = o Ben+e+ficiado contraído"
+Nogr.a,Nogueira,apelidos,apelido,registos paroquiais séc. XVII-XVIII,apelido frequente
