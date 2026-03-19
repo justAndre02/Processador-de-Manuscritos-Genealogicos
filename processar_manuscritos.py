@@ -423,6 +423,10 @@ em `nome_expandido`. **Nunca confundas abreviaturas de apelido com abreviaturas 
 "Silva" como apelido exige OBRIGATORIAMENTE `da S.ª` / `da S.a` — o `da` tem de estar escrito no manuscrito. \
 Exemplos: `"Tereza Barbara S.a"` → `nome_expandido="Teresa Bárbara"`, `estado_civil="solteira"` (NÃO Silva). \
 `"Manoel da S.ª"` → `nome_expandido="Manuel da Silva"`, estado civil pelo contexto.
+**CRÍTICO — nunca inventes expansão para apelido abreviado incerto**: se o apelido abreviado \
+não tiver correspondência inequívoca na tabela de siglas e a leitura não for segura (ex.: `Carra.a`), \
+remove esse apelido de `nome_expandido` e mantém apenas a parte certa do nome. \
+Exemplo: `"Maria Tereza Carra.a"` → `nome_expandido="Maria Teresa"` (sem expandir o apelido incerto).
 **NUNCA acrescentes `da`/`de` a um apelido se não estiver escrito no manuscrito.**
 3. A cabeça do fogo (`#`) tem parentesco "cabeça". O primeiro membro de um grupo `//` \
 tem SEMPRE parentesco "cabeça" (é chefe do seu sub-agregado). \
@@ -795,6 +799,24 @@ def build_table(pages_data: list[dict]) -> list[dict]:
             current_lugar = lugar_proximo.strip()
 
     # ------------------------------------------------------------------
+    # Pós-processamento: normalizar campo Confessou
+    # Qualquer sigla/texto no campo de confissão implica confessou="sim".
+    # Ex.: "Sopti" (variante paleográfica) deve contar como confissão.
+    # ------------------------------------------------------------------
+    _conf_tokens_pat = re.compile(r"^(?:conf(?:es)?\.?|sopti\.?|spti\.?)$", re.IGNORECASE)
+    for r in rows:
+        conf_raw = (r["Confessou"] or "").strip()
+        conf_norm = conf_raw.lower()
+        if conf_norm in ("sim", "não", "nao", "ilegível", "ilegivel", ""):
+            continue
+        r["Confessou"] = "sim"
+        if conf_raw and conf_raw.lower() not in r["Observações"].lower():
+            if not _conf_tokens_pat.match(conf_raw):
+                r["Observações"] = "; ".join(filter(None, [r["Observações"], conf_raw]))
+            elif re.search(r"(?i)\bsopti\b|\bspti\b", conf_raw):
+                r["Observações"] = "; ".join(filter(None, [r["Observações"], conf_raw]))
+
+    # ------------------------------------------------------------------
     # Pós-processamento: corrigir "casado/a" indevido em cabeças sozinhas
     # O modelo confunde V.ª (viúva) com abreviaturas de casamento.
     # Regra: cabeça sem "mulher" no fogo + sem cônjuge ausente → viúvo/a
@@ -862,6 +884,27 @@ def build_table(pages_data: list[dict]) -> list[dict]:
                 "prima": "primo",
             }
             r["Parentesco"] = _fem_to_masc.get(r["Parentesco"], r["Parentesco"])
+
+    # ------------------------------------------------------------------
+    # Pós-processamento: "oP.e" lido como "D." + "Sopti" na confissão
+    # Corrige entradas masculinas onde o prefixo "D." no nome é leitura
+    # errada de "o P.e" (padre), sinalizada por Sopti/Spti.
+    # ------------------------------------------------------------------
+    _d_prefix = re.compile(r'^D\.\s+', re.IGNORECASE)
+    for r in rows:
+        if r["Sexo"] != "M":
+            continue
+        if "padre" in r["Observações"].lower() or "doutor" in r["Observações"].lower():
+            continue
+        if not _d_prefix.search(r["NomeOriginal"]):
+            continue
+        marker_text = " ".join([r["Confessou"], r["Observações"]])
+        if not re.search(r"(?i)\bsopti\b|\bspti\b", marker_text):
+            continue
+        r["NomeOriginal"] = _d_prefix.sub("", r["NomeOriginal"]).strip()
+        r["NomeAtualizado"] = _d_prefix.sub("", r["NomeAtualizado"]).strip()
+        r["Observações"] = "; ".join(filter(None, ["Padre", r["Observações"]]))
+        r["EstadoCivil"] = "solteiro"
 
     # ------------------------------------------------------------------
     # Pós-processamento: D.or/Dr./oD.or no nome → Doutor em observações
@@ -992,6 +1035,35 @@ def build_table(pages_data: list[dict]) -> list[dict]:
             r["Observações"] = _subfogo_re.sub(
                 f"sub-fogo do fogo {parent}", r["Observações"]
             )
+
+    # ------------------------------------------------------------------
+    # Pós-processamento: sigla de apelido indeterminada no fim do nome
+    # Quando aparece um apelido abreviado final sem correspondência no
+    # CSV de siglas (ex.: "Carra.a"), ignora-se esse apelido no nome
+    # expandido para evitar invenções como "Carrara".
+    # ------------------------------------------------------------------
+    known_siglas: set[str] = set()
+    try:
+        with open(CSV_MAPPING, newline="", encoding="utf-8-sig") as fh:
+            for row in csv.DictReader(fh):
+                for part in re.split(r"\s*/\s*", row.get("Sigla", "")):
+                    token = re.sub(r"\s+", "", part).strip().lower()
+                    if token:
+                        known_siglas.add(token)
+    except FileNotFoundError:
+        pass
+
+    _unknown_tail_sigla_pat = re.compile(r"([A-Za-zÀ-ÿ]{3,}\.[A-Za-zÀ-ÿªº])\s*$")
+    for r in rows:
+        m = _unknown_tail_sigla_pat.search(r["NomeOriginal"])
+        if not m:
+            continue
+        sigla_final = re.sub(r"\s+", "", m.group(1)).lower()
+        if sigla_final in known_siglas:
+            continue
+        nome_tokens = r["NomeAtualizado"].split()
+        if len(nome_tokens) > 1:
+            r["NomeAtualizado"] = " ".join(nome_tokens[:-1])
 
     return rows
 

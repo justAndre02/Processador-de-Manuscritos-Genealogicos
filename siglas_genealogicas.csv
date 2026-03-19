@@ -38,7 +38,7 @@ pob. / povo,povoação,topónimos,localidade,"""pob. de …""",menos comum
 da / de / d',de / da / do,apelidos,preposição,"""Maria da S.""",parte de apelido
 daS.a / daS.º,da Silva,apelidos,apelido,"""António daS.a"" / ""Manoel daS.º""","forma masculina (daS.º) e feminina (daS.a); determinante colado à sigla"
 Sz.ª,Sousa,apelidos,apelido,"""Manuel Sz.ª""",z indica Sousa
-Glz / Gliz,Gonçalves,apelidos,apelido,"""Manuel Glz.""",comum séc. XVIII
+Glz / Gliz / Glz.s,Gonçalves,apelidos,apelido,"""Manuel Glz.""",comum séc. XVIII
 Roiz / Riz,Rodrigues,apelidos,apelido,"""João Roiz""",-iz indica Rodrigues
 R.o,Rodrigo,nomes próprios,nome,"""R.o Pereira""",abreviado
 Rib.ro / Rib. / Ribr.o,Ribeiro,apelidos,apelido,"""António Rib.ro""",forma clara
@@ -119,7 +119,7 @@ M.da / Marg.da / Mg.da,Margarida,nomes próprios,nome próprio feminino,registos
 Mag.es,Magalhães,apelidos,apelido,registos paroquiais séc. XVII-XVIII,apelido frequente no Noroeste
 Mdz,Mendes,apelidos,apelido,registos paroquiais séc. XVII-XVIII,patronímico de Mendo
 Mir.da,Miranda,apelidos,apelido / topónimo,registos paroquiais séc. XVII-XVIII,apelido e topónimo
-Miz,Martins,apelidos,apelido,registos paroquiais séc. XVII-XVIII,não confundir com Miz.ª = Misericórdia
+Miz / Miz.,Martins,apelidos,apelido,registos paroquiais séc. XVII-XVIII,não confundir com Miz.ª = Misericórdia
 N.es,Nunes,apelidos,apelido,registos paroquiais séc. XVII-XVIII,patronímico de Nuno
 Oliv.ra,Oliveira,apelidos,apelido,registos paroquiais séc. XVII-XVIII,apelido muito frequente
 Piz,Pires,apelidos,apelido,registos paroquiais séc. XVII-XVIII,patronímico de Pero/Pedro
@@ -165,3 +165,7 @@ deSacramento / de Sacram.,de Sacramento,apelidos,apelido de devoção religiosa,
 dos Santos / dosSantos,dos Santos,apelidos,apelido de devoção religiosa,registos paroquiais séc. XVII-XVIII,"apelido; NUNCA confundir com nome próprio Santos — 'dosSantos' ou 'dos Santos' após nome próprio é SEMPRE o apelido 'dos Santos' (ex: 'João dosSantos' → nome_expandido='João dos Santos')"
 oBn.do, o Beneficiado,o Beneficiado,tratamentos/títulos,título eclesiástico,registos de casamento e óbito séc. XVII-XVIII,"variante de Beneficiado; oB = o Ben+e+ficiado contraído"
 Nogr.a,Nogueira,apelidos,apelido,registos paroquiais séc. XVII-XVIII,apelido frequente
+daConc.am,da Conceição,apelidos,apelido de devoção mariana,registos paroquiais séc. XVII-XVIII,"apelido; NUNCA confundir com nome próprio Conceição — 'daConc.am' ou 'da Conc.am' após nome próprio é SEMPRE o apelido 'da Conceição' (ex: 'Maria daConc.am' → nome_expandido='Maria da Conceição')"
+Salg.do,Salgado,apelidos,apelido,registos paroquiais séc. XVII-XVIII,apelido frequente
+deCarv.o / deCarv.º,de Carvalho,apelidos,apelido,registos paroquiais séc. XVII-XVIII,"apelido; NUNCA confundir com nome próprio Carvalho — 'deCarv.o' ou 'deCarv.º' após nome próprio é SEMPRE o apelido 'de Carvalho' (ex: 'João deCarv.o' → nome_expandido='João de Carvalho')"
+Carvalh.o / Carvalh.º / Carv.o / Carv.º,Carvalho,apelidos,apelido,registos paroquiais séc. XVII-XVIII,"forma alternativa de abreviar 'de Carvalho'; NUNCA confundir com nome próprio Carvalho — 'Carvalh.o' ou 'Carvalh.º' após nome próprio é SEMPRE o apelido 'Carvalho' (ex: 'João Carvalh.o' → nome_expandido='João Carvalho')"
