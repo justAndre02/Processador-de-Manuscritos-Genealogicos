@@ -116,7 +116,7 @@ do nome é o indicador inequívoco de que se trata do marcador de sub-fogo. \
 mesmo que essa pessoa só tenha estado civil indicado (`S.ª`, `V.ª`, `cas.`) e nenhum \
 outro marcador de parentesco. \
 **`//` tem prioridade sobre `f.al`/oficial**: se a pessoa tiver `//` + `f.al`, \
-`parentesco = "cabeça"` e coloca `"oficial"` em `observacoes`. \
+usa `parentesco = "cabeça"` e coloca `"oficial"` em `observacoes`. \
 **`//` (ou `#`) seguido de `P.e` / `o P.e`**: o símbolo de fogo é `//` (ou `#`); \
 o `P.e` / `o P.e` NÃO é parte do marcador de fogo nem do nome — vai OBRIGATORIAMENTE \
 para `observacoes` como `"Padre"`. Exemplo: `11 o P.e Thomaz Fran.co` → \
@@ -184,7 +184,7 @@ parentesco com a cabeça (m.er/mul. = mulher; f.º/f.ª = filho/filha; \
 cr.º/cr.ª = criado/criada; etc.)
 3. **À direita, após uma linha horizontal** (campo `confessou`): \
 - "Confes." / "Conf." → `confessou = "sim"`. \
-- Qualquer outra palavra ou abreviatura nessa posição (ex: "D.M.") → `confessou = "sim"` \
+- Qualquer outra palavra ou abreviatura nessa posição (ex: "D.M.", "Saptis", "Soptis", "Sept.") → `confessou = "sim"` \
   **e** acrescenta essa palavra/abreviatura em `observacoes`. \
 - Ausência de qualquer texto após a linha horizontal → `confessou = "não"`. \
 **`F.`** que apareça **acima ou ao longo da linha** (como anotação separada) significa que a \
@@ -227,8 +227,8 @@ Se a abreviatura após um nome tem duas letras começando por `c`, é `cr.` (cri
 **`Ir.` vs `f.` (filho)**: `Ir.` tem DUAS letras (`I`+`r`); `f.` filho é UMA única letra `f`. \
 Se a abreviatura após um nome tem duas letras começando por `I`/`i`, é `Ir.` (irmão) — NUNCA `f.` (filho). \
 `"Joaquim Fr.co de Leyva Ir."` → `parentesco="irmão"`, NÃO filho.
-f.al = oficial **apenas para homens** (não é grau de parentesco — coloca `"oficial"` em `observacoes`, \
-usa `parentesco="outro"`); \
+f.al = oficial **apenas para homens** (grau de parentesco — usa `parentesco="oficial"` e não coloques em `observacoes` \
+a não ser que a pessoa seja também a cabeça do fogo, que nesse caso o `parentesco="cabeça"` e `"oficial"` vai para `observacoes`); \
 **REGRA CRÍTICA**: se `f.al` aparecer após um nome **feminino** (sexo=F), NÃO é "oficial" — \
 é quase sempre uma leitura errada de `f.ª` (filha); usa `parentesco="filha"` e **não** colocas nada em `observacoes`; \
 se a linha tiver `//`, vai para `observacoes` e `parentesco = "cabeça"`); \
@@ -241,6 +241,7 @@ depois do primeiro nome de um membro NÃO é o apelido Sousa — é `Ir.` (irmã
 `Sz.`/`Sz.ª` como apelido só é válido se o cabeça do mesmo fogo TAMBÉM tiver "Sousa". \
 `Ir.`/`Ir.ª` é SEMPRE parentesco (irmão/irmã) e NUNCA faz parte do nome. \
 Exemplo: fogo cujo cabeça é "João da Costa" → `"Bento Sz."` = `nome_original="Bento"`, `parentesco="irmão"`. \
+**Oficial**: Palavras ou abreviaturas como `ofecial`, `oficial`, `ofecial.` ou `oficial.` e `f.al` NUNCA fazem parte do nome. Usa `parentesco="oficial"` (a menos que a pessoa seja cabeça de casal, caso em que vai para observações). \
 **IMPORTANTE**: qualquer variante de "f" abreviado (`f.º`, `f.°`, `f.`, `fo.`) \
 isolado após o nome é SEMPRE parentesco **"filho"** — mesmo que outras abreviaturas \
 (estado civil, observações) apareçam a seguir. \
@@ -248,6 +249,7 @@ isolado após o nome é SEMPRE parentesco **"filho"** — mesmo que outras abrev
 `Frz.` / `Frz` / `Friz` = apelido **Fernandes**; \
 `Ir.` / `ir.` / `Ir.ª` / `ir.ª` = **irmão/irmã** — o `I` cursivo pode parecer `f`, mas `Ir.` tem SEMPRE duas letras (`I`+`r`), enquanto `f.` filho é uma única letra `f` isolada. \
 Nunca uses `"filho"` quando a abreviatura tiver duas ou mais letras (ex: `Ir.`, `Frz.`). \
+**Atenção inversa de erro de leitura**: se a imagem contiver APENAS `"f.o"` (ou `f.`) o modelo não pode confundir com `Ir.` (irmão) ou ignorá-lo; `f.o` significa sempre parentesco **"filho"**. O `I` e `r` não constam lá. \
 Exemplo concreto: a linha **"João da Costa f.° caz. Sep."** deve produzir \
 `nome_original="João da Costa"`, `parentesco="filho"`, `estado_civil="casado"`, \
 `observacoes="separado"` — o `f.°` define o parentesco, `caz.` o estado civil, `Sep.` a observação.
@@ -277,11 +279,17 @@ independentemente do parentesco. A regra de omissão (criado → solteiro) só s
 quando NENHUM marcador de estado civil aparece no manuscrito — um `V.º` escrito SEMPRE prevalece.
 6. **Observações especiais** que aparecem depois do nome e vão para o campo Observações \
 (não para os outros campos): sp. / Sep. / sep. / Se.p / se.p = separado/separada; \
-mentecapto; cego; forasteiro; deslocado; menor (m.); [ilegível]; etc. \
+mentecapto; cego; mudo; forasteiro; deslocado; menor (m.); [ilegível]; etc. \
+**ATENÇÃO paleográfica — `Sego` mal lido como `Lego`**: nestes manuscritos o `S` maiúsculo cursivo parece um `L`. Se leres a palavra `"Lego"` junto ao nome de alguém (ex: antes de `cr.`), trata-se na verdade de `"Sego"` (grafia antiga para Cego). Não faz parte do nome! Retira do nome e coloca obrigatoriamente `"cego"` em `observacoes`. \
+**`Mudo` / `mudo`** que apareça junto ao nome: indica que a pessoa é muda. Não faz parte do nome! Retira obrigatoriamente do nome e coloca `"mudo"` ou `"muda"` em `observacoes`. \
 **`Ama`** que apareça junto ao nome de uma criada indica a sua função de ama (ama de leite \
 ou ama seca) — o `parentesco` mantém-se **"criada"** e regista `"Ama"` em `observacoes`. \
+**`Aja` / `Aia`** que apareça junto ao nome (frequentemente com ponto no fim "Aja.") indica \
+a função de aia — o `parentesco` DEVE ser **"criada"** e regista obrigatoriamente `"Aia"` \
+em `observacoes`. Aja/Aia NUNCA faz parte do nome. \
 **`Escrava` / `Escrav.` / `Escravo`** junto ao nome: a pessoa é escrava → coloca "escrava" (F) \
 ou "escravo" (M) em `observacoes`; `parentesco` mantém-se "criada"/"criado". \
+**ATENÇÃO paleográfica — `Subd.` em fim de linha**: Se a linha apresentar no fim a palavra `Subd.` ou `fubd.`, nunca a transformes em "in minoribus", em "Subdiácono" ou algo parecido. Coloca literalmente a sigla com um ponto de interrogação nas observações: `"Subd.?"` ou `"fubd.?"`. \
 **ATENÇÃO paleográfica — `Escrava` lida como `Cicrava`**: o `E` cursivo maiúsculo parece `C`, \
 e o `s` parece `i`, tornando "Escrava" em "Cicrava". "Cicrava" não existe em português — \
 se leste "Cicrava" ou forma semelhante, é SEMPRE "Escrava".
@@ -320,7 +328,7 @@ válido com a estrutura seguinte (sem texto antes ou depois, sem blocos de códi
           "nome_expandido": "APENAS o nome próprio e apelido com abreviaturas do nome expandidas — SEM palavras de papel ou estado civil",
           "sexo": "M ou F",
           "estado_civil": "casado | casada | solteiro | solteira | viúvo | viúva | desconhecido",
-                    "parentesco": "cabeça | mulher | filho | filha | irmão | irmã | primo | prima | criado | criada | servo | serva | neto | neta | sobrinho | sobrinha | afilhado | afilhada | sogro | sogra | genro | nora | cunhado | cunhada | tio | tia | avô | avó | pai | mãe | outro | desconhecido",
+          "parentesco": "cabeça | mulher | filho | filha | irmão | irmã | primo | prima | criado | criada | oficial | aprendiz | companheiro | mestre | caixeiro | servo | serva | neto | neta | sobrinho | sobrinha | afilhado | afilhada | sogro | sogra | genro | nora | cunhado | cunhada | tio | tia | avô | avó | pai | mãe | outro | desconhecido",
           "confessou": "sim | não | ilegível",
           "observacoes": "notas relevantes separadas por vírgula, vazio se não houver"
         }}
@@ -334,6 +342,8 @@ válido com a estrutura seguinte (sem texto antes ou depois, sem blocos de códi
 Nunca incluas abreviaturas de papel (m.er, f.º, f.°, f., cr.º, f.al, sobr.º, **P.e**, etc.) nem de \
 estado civil (S.º, cas., viu., etc.) no nome — essas vão para as colunas correctas. \
 **`P.e` / `o P.e` NUNCA faz parte do nome** — vai OBRIGATORIAMENTE para `observacoes` como `"Padre"` (ver Regra 7). \
+**Atenção paleográfica — `oP.e` mal lido como `ob.`, `ol.` ou `R.do`**: o prefixo `oP.e` \
+pode assemelhar-se a `ob.`, `ol.` ou até `R.do` devido à grande laçada do 'P'. Se a primeira palavra antes de um nome for lida como `ob.`, `ol.` ou `R.do`, é quase certamente `oP.e` (o Padre). Tem de ser removido do nome e colocado como `"Padre"` nas `observacoes`. \
 **ATENÇÃO ESPECIAL**: `Pr.ª` / `Pr.a` / `P.ª` / `P.ra` são abreviaturas do apelido **Pereira** \
 e fazem SEMPRE parte do nome — nunca as omitas, nunca as interpretes como parentesco. \
 Se o manuscrito tiver "Anna Pr.ª", `nome_original` = "Anna Pr.ª" e `nome_expandido` = "Anna Pereira". \
@@ -378,10 +388,14 @@ parte do nome e DEVE ser incluído em `nome_original` e expandido para "Peixoto"
 Nunca o interpretes como parentesco, estado civil ou outro campo. \
 **Nomes com `D.`/`D.ª` (Dom/Dona) — lê o nome completo**: pessoas com prefixo honorífico \
 `D.` ou `D.ª` têm frequentemente dois ou três nomes próprios e/ou apelido (ex: `"D. Anna M.a Leonor"`). \
-**Excepção obrigatória**: `D.or` / `Dr.` / `oD.or` / `Dor` = **Doutor** (título) e NUNCA faz parte do nome; \
-nestes casos remove o título do nome e coloca `"Doutor"` em `observacoes`. \
-**NUNCA omitas este marcador inicial**: se existir um token antes do nome com forma próxima de `Dor`/`D.or`/`Dr`, \
-regista obrigatoriamente `"Doutor"` em `observacoes`, mesmo quando o `D` parece um `o` ligado.
+O `D.` ou `D.ª` DEVE constar no `nome_original` e DEVE ser EXPLICITAMENTE expandido no `nome_expandido` \
+para "Dom" ou "Dona" (ex. `"Dona Jacinta Margarida"`). \
+**Nomes com "pelo Crisma" / "pela Crisma"**: se a expressão "pelo Crisma" ou "pela Crisma" (que muitas vezes é lida erroneamente em cursivo como "pela Cierma", "pela Creyma", etc.) aparecer a separar dois nomes (ex: `"Custodia pela Crisma Maria"` ou `"Custodia, pela Crisma Maria"`), significa que a pessoa mudou de nome na Confirmação. \
+Nesse caso, `nome_original` e `nome_expandido` devem manter APENAS o primeiro nome (ex: `"Custodia"` / `"Custódia"`), e deves adicionar a anotação do novo nome nas `observacoes` (ex: `"pelo Crisma Maria"`). Não incluas a expressão "pela Crisma Maria" na coluna de nome. \
+**Excepção obrigatória**: `D.or` / `D.tor` / `Dr.` / `o D.tor` / `oD.or` / `Dor` = **Doutor** (título) e NUNCA faz parte do nome; \
+nestes casos remove o título do `nome_original` e `nome_expandido` e coloca obrigatoriamente `"o Doutor"` ou `"Doutor"` em `observacoes`. \
+**NUNCA omitas este marcador inicial nem o percas**: se existir um token antes do nome com forma próxima de `Dor`/`D.or`/`Dr`/`D.tor` ou `o D.tor`, \
+regista obrigatoriamente `"o Doutor"` ou `"Doutor"` em `observacoes`, mesmo quando o `D` parece um `o` ligado.
 Lê TODAS as palavras antes do primeiro marcador de parentesco (`fa.`/`f.ª`, `f.º`, `m.er`, `cr.`, etc.) \
 ou estado civil (`S.ª`, `cas.`, `V.ª`, etc.) como parte do nome — \
 NUNCA interrompas a leitura do nome ao encontrar uma palavra que parece um nome isolado. \
@@ -450,13 +464,17 @@ afecta nem altera o estado civil — vai apenas para `observacoes`. \
 `simbolo="//"`, `nome_original="Rodrigo de Freitas"`, `parentesco="cabeça"`, \
 `estado_civil="viúvo"` (V.º lido antes de cunh.), `observacoes="cunhado"`.
 4. `f.al` após um nome **masculino** (sexo=M) = o membro é um trabalhador do fogo ("oficial"); \
-coloca `"oficial"` em `observacoes` e usa `parentesco="outro"` (não é um grau de parentesco). \
+usa `parentesco="oficial"` (não coloques nada em `observacoes`). \
 `f.al` após um nome **feminino** (sexo=F) = leitura errada de `f.ª` → `parentesco="filha"`, \
 nada em `observacoes`. \
-**CRÍTICO — NUNCA inferir "oficial" por aproximação**: só usa `"oficial"` quando leres \
+**CRÍTICO — NUNCA inferir "oficial" por aproximação**: só usa `parentesco="oficial"` quando leres \
 explicitamente `f.al` (ou variante paleográfica inequívoca da mesma sigla). \
-`Comp.o` = **companheiro** (vai para `observacoes` como `"companheiro"`, NÃO oficial). \
-`Caixr.o`/`Caixr`/`Caxr.o` = **caixeiro** (vai para `observacoes` como `"caixeiro"`, NÃO oficial).
+**Cargos profissionais (Aprendiz, Companheiro, Mestre, Caixeiro)**: Devem ser SEMPRE colocados na coluna \
+`parentesco` (como "aprendiz", "companheiro", "mestre", "caixeiro") e NÃO em `observacoes`. \
+`Comp.o`/`Comp.`/`Companhr.o` = **companheiro** → `parentesco="companheiro"`. \
+`Caixr.o`/`Caixr`/`Caxr.o` = **caixeiro** → `parentesco="caixeiro"`. \
+`Mestre` = **mestre** → `parentesco="mestre"`. \
+`Ap.`/`Apdz.`/`Aprendiz` = **aprendiz** → `parentesco="aprendiz"`.
 5. `sp.` / `Sep.` / `sep.` / `Se.p` / `se.p` após um nome = a pessoa está separada → \
 coloca **"separado"** (se `sexo` = M) ou **"separada"** (se `sexo` = F) em `observacoes`; \
 o `estado_civil` mantém-se normalmente "casado/a".

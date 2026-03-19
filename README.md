@@ -127,7 +127,7 @@ O resultado principal é uma tabela com uma linha por pessoa, com as seguintes c
 | **NomeAtualizado** | Nome com abreviaturas expandidas |
 | **Sexo** | M / F |
 | **EstadoCivil** | casado/a · solteiro/a · viúvo/a · desconhecido |
-| **Parentesco** | cabeça · mulher · filho · filha · criado · criada · oficial · servo · serva · neto · neta · sobrinho · sobrinha · outro |
+| **Parentesco** | cabeça · mulher · filho · filha · criado · criada · oficial · aprendiz · companheiro · mestre · caixeiro · servo · serva · neto · neta · sobrinho · sobrinha · outro |
 | **Confessou** | sim · não · ilegível |
 | **Observações** | Associação de sub-fogos, separada (sp.), mentecapto, cego, forasteiro, etc. |
 
