@@ -38,6 +38,7 @@ pob. / povo,povoação,topónimos,localidade,"""pob. de …""",menos comum
 da / de / d',de / da / do,apelidos,preposição,"""Maria da S.""",parte de apelido
 daS.a / daS.º,da Silva,apelidos,apelido,"""António daS.a"" / ""Manoel daS.º""","forma masculina (daS.º) e feminina (daS.a); determinante colado à sigla"
 Sz.ª,Sousa,apelidos,apelido,"""Manuel Sz.ª""",z indica Sousa
+deSz.ª / deSz.a,de Sousa,apelidos,apelido,"""António deSz.ª"" / ""Manoel deSz.º""",forma masculina (deSz.º) e feminina (deSz.ª); determinante colado à sigla
 Glz / Gliz / Glz.s,Gonçalves,apelidos,apelido,"""Manuel Glz.""",comum séc. XVIII
 Roiz / Riz,Rodrigues,apelidos,apelido,"""João Roiz""",-iz indica Rodrigues
 R.o,Rodrigo,nomes próprios,nome,"""R.o Pereira""",abreviado
@@ -112,18 +113,19 @@ Mg.l,Miguel,nomes próprios,nome próprio,registos paroquiais séc. XVII-XVIII,a
 Alves / Alvres / Alz,Álvares,apelidos,apelido,registos paroquiais séc. XVII-XVIII,variantes gráficas de Álvares
 An.tes,Antunes,apelidos,apelido,registos paroquiais séc. XVII-XVIII,patronímico de António
 Andr.e,Andrade,apelidos,apelido,registos paroquiais séc. XVII-XVIII,apelido frequente no Minho
-Ar.º / de A. / de Ar.º,Araújo / de Araújo,apelidos,apelido,"""Jozé de A."" / ""Valentin de Ar.º""","determinante ""de"" pode aparecer colado à sigla; A. sozinho só expande para Araújo em contexto de apelido"
+Ar.º / Ar.o / de A. / de Ar.º / deAr.o,Araújo / de Araújo,apelidos,apelido,"""Jozé de A."" / ""Valentin de Ar.º""","determinante ""de"" pode aparecer colado à sigla; A. sozinho só expande para Araújo em contexto de apelido"
 C.ta,Costa,apelidos,apelido,registos paroquiais séc. XVII-XVIII,forma abreviada de Costa
 Con.tras,Contreiras,apelidos,apelido,registos paroquiais séc. XVII-XVIII,apelido com abreviação interna
 D.es,Domingues,apelidos,apelido,registos paroquiais séc. XVII-XVIII,patronímico de Domingos
 Diz,Dias,apelidos,apelido,registos paroquiais séc. XVII-XVIII,abreviatura de Dias
 Figr.a,Figueira,apelidos,apelido / topónimo,registos paroquiais séc. XVII-XVIII,não confundir com Fg.do = Figueiredo
-Fr.ª / Ferr.ª / Fr.ra / Ferr.a / Fer.ª / Frr.ª / Ferz.al,Ferreira,apelidos,apelido,registos paroquiais séc. XVII-XVIII,"variantes de Ferreira; apelido muito comum; o rr cursivo pode parecer rz — não confundir com Frz./Friz (Fernandes)"
+Fr.ª / Ferr.ª / Fr.ra / Ferr.a / Fer.ª / Frr.ª / Frr.a / Ferz.al,Ferreira,apelidos,apelido,registos paroquiais séc. XVII-XVIII,"variantes de Ferreira; apelido muito comum; o rr cursivo pode parecer rz — não confundir com Frz./Friz (Fernandes)"
 Frz / Friz,Fernandes,apelidos,apelido,registos paroquiais séc. XVII-XVIII,"patronímico de Fernando; ATENÇÃO: Frz tem apenas Fr+z; Ferr.a/Ferr.ª/Frr.ª com duas letras r = Ferreira, não Fernandes"
 G.ro / G.ra,Guerreiro / Guerreira,apelidos,apelido,registos paroquiais séc. XVII-XVIII,masc./fem. do apelido Guerreiro
 M.ca / M.ça,Mendonça,apelidos,apelido,registos paroquiais séc. XVII-XVIII,variantes de Mendonça
 M.da / Marg.da / Mg.da,Margarida,nomes próprios,nome próprio feminino,registos paroquiais séc. XVII-XVIII,variantes de Margarida
 Mag.es,Magalhães,apelidos,apelido,registos paroquiais séc. XVII-XVIII,apelido frequente no Noroeste
+de Mag.es / de Magalhães, de Magalhães,apelidos,apelido,registos paroquiais séc. XVII-XVIII,"variante com determinante ""de"" colado à sigla"
 Mdz,Mendes,apelidos,apelido,registos paroquiais séc. XVII-XVIII,patronímico de Mendo
 Mir.da,Miranda,apelidos,apelido / topónimo,registos paroquiais séc. XVII-XVIII,apelido e topónimo
 Miz / Miz.,Martins,apelidos,apelido,registos paroquiais séc. XVII-XVIII,não confundir com Miz.ª = Misericórdia
@@ -132,7 +134,7 @@ Oliv.ra / Oliv.a / Oliv.ª,Oliveira,apelidos,apelido,registos paroquiais séc. X
 deOliv.ra / de Oliv.ra /de Oliv.a / deOlivr.a, de Oliveira,apelidos,apelido,registos paroquiais séc. XVII-XVIII,"variante com determinante ""de"" colado à sigla"
 Piz,Pires,apelidos,apelido,registos paroquiais séc. XVII-XVIII,patronímico de Pero/Pedro
 Seq.ra / Siq.ra,Sequeira,apelidos,apelido,registos paroquiais séc. XVII-XVIII,variantes gráficas de Sequeira
-V.a / V.ra / Vr.a,Vieira,apelidos,apelido,registos paroquiais séc. XVII-XVIII,variantes de Vieira
+V.ra / Vr.a / Vr.ª,Vieira,apelidos,apelido,registos paroquiais séc. XVII-XVIII,variantes de Vieira
 V.e / V.te,Vicente,nomes próprios,nome próprio,registos paroquiais séc. XVII-XVIII,abreviatura de Vicente
 F.ro,Fevereiro,meses/datas,mês (data),registos paroquiais séc. XVII-XVIII,abreviatura de Fevereiro em datas
 m.to,muito,termos administrativos,qualificativo / advérbio,registos paroquiais e notariais séc. XVII-XVIII,abreviatura frequente em formulários paroquiais
@@ -169,7 +171,7 @@ Escudr.o / Escudr.º / Ecudr.º / Escudro,Escudeiro,termos administrativos,títu
 de Eça / d'Eça / D'Eça / deEça,de Eça,apelidos,apelido nobre,registos paroquiais séc. XVII-XVIII,"apelido por extenso; E cursivo pode parecer B tornando 'Eça' em 'Beca' (B←→E confusão); se leres 'de Beca' ou 'dBeca' após D./D.ª reconsidera 'de Eça'"
 da Luz / daLuz / d'Luz,da Luz,apelidos,apelido de devoção mariana,registos paroquiais séc. XVII-XVIII,"apelido; NUNCA confundir com nome próprio Luísa/Luís — 'daLuz' ou 'd.Luz' após nome próprio é SEMPRE o apelido 'da Luz' (ex: 'Maria daLuz' → nome_expandido='Maria da Luz')"
 Montr. / Montr.o / Mont.ro,Monteiro,apelidos,apelido,registos paroquiais séc. XVII-XVIII,apelido frequente; forma abreviada de Monteiro
-deSacramento / de Sacram. /deSacramt.o,de Sacramento,apelidos,apelido de devoção religiosa,registos paroquiais séc. XVII-XVIII,"apelido; NUNCA confundir com nome próprio Sacramento — 'deSacramento' ou 'de Sacram.' após nome próprio é SEMPRE o apelido 'de Sacramento' (ex: 'Maria deSacramento' → nome_expandido='Maria de Sacramento')"
+deSacramento / de Sacram. / deSacramt.o,de Sacramento,apelidos,apelido de devoção religiosa,registos paroquiais séc. XVII-XVIII,"apelido; NUNCA confundir com nome próprio Sacramento — 'deSacramento' ou 'de Sacram.' após nome próprio é SEMPRE o apelido 'de Sacramento' (ex: 'Maria deSacramento' → nome_expandido='Maria de Sacramento')"
 dos Santos / dosSantos,dos Santos,apelidos,apelido de devoção religiosa,registos paroquiais séc. XVII-XVIII,"apelido; NUNCA confundir com nome próprio Santos — 'dosSantos' ou 'dos Santos' após nome próprio é SEMPRE o apelido 'dos Santos' (ex: 'João dosSantos' → nome_expandido='João dos Santos')"
 oBn.do, o Beneficiado,o Beneficiado,tratamentos/títulos,título eclesiástico,registos de casamento e óbito séc. XVII-XVIII,"variante de Beneficiado; oB = o Ben+e+ficiado contraído"
 Nogr.a / Nogr.o,Nogueira,apelidos,apelido,registos paroquiais séc. XVII-XVIII,apelido frequente
@@ -181,3 +183,13 @@ deS.Bento, de São Bento,apelidos,apelido de devoção religiosa,registos paroqu
 deS.Paio/ deS.Pajo, de São Paio,apelidos,apelido de devoção religiosa,registos paroquiais séc. XVII-XVIII,"apelido; NUNCA confundir com nome próprio Paio — 'deS.Paio' ou 'de S.Paio' após nome próprio é SEMPRE o apelido 'de São Paio' (ex: 'João deS.Paio' → nome_expandido='João de São Paio')"
 Teix.a / Teixr.a / Teixr.ª,Teixeira,apelidos,apelido,registos paroquiais séc. XVII-XVIII,apelido frequente
 Guim.es / Guim.ª,Guimarães,apelidos,apelido,registos paroquiais séc. XVII-XVIII,apelido frequente
+Bapt.a / Bapt.ª,Baptista,apelidos,apelido,registos paroquiais séc. XVII-XVIII,apelido frequente
+Huberta,Noberta,abreviaturas de nomes próprios,atualização ortográfica,Fran.ca Nuberta,No manuscrito está escrito Nuberta que hoje em dia passa a Noberta
+Nuberta,Noberta,abreviaturas de nomes próprios,atualização ortográfica,Fran.ca Nuberta,No manuscrito está escrito Nuberta que hoje em dia passa a Noberta
+Cabelleireiro / Cabeleireiro,cabeleireiro,observações,profissão,Antonio Iozé Cabelleireiro,"vai para observações como ""cabeleireiro"""
+ofeçial / ofecial / oficial,oficial,parentesco,profissão / condição,Constantino Jozé ofeçial,"vai para Parentesco como ""oficial"""
+Nascimento / Nascim.to / Nascimt.o / Nascim.,nascimento,estado civil/filiação,evento de nascimento,registos paroquiais séc. XVII-XVIII,"vai para Observações como ""nascimento""; não confundir com nome próprio Nascimento"
+Carnr.o / Carnro / Caxnr.o / Caxnro / Caxnr.,Carneiro,apelidos,apelido,registos paroquiais séc. XVII-XVIII,apelido frequente
+Qr.s / Qr.z /Qr.oz,Queirós,apelidos,apelido,registos paroquiais séc. XVII-XVIII,"variante de Queirós; o r cursivo pode ser lido como z (confusão paleográfica comum)"
+Maximo,Marinho,apelidos,apelido,"João Maximo / João Marinho","Erro frequente de leitura onde 'Marinho' cursivo é lido como 'Maximo'; corrigir para Marinho"
+Ierey,Jesus,nomes e apelidos,apelido,"Maria de Ierey","Erro frequente de leitura cursivo, onde o J é lido como I, o s cursivo intermédio lido como e/r, e o s final como y; corrigir para Jesus"

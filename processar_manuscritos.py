@@ -279,7 +279,7 @@ independentemente do parentesco. A regra de omissão (criado → solteiro) só s
 quando NENHUM marcador de estado civil aparece no manuscrito — um `V.º` escrito SEMPRE prevalece.
 6. **Observações especiais** que aparecem depois do nome e vão para o campo Observações \
 (não para os outros campos): sp. / Sep. / sep. / Se.p / se.p = separado/separada; \
-mentecapto; cego; mudo; forasteiro; deslocado; menor (m.); [ilegível]; etc. \
+mentecapto; cego; mudo; forasteiro; deslocado; menor (m.); demente; [ilegível]; etc. \
 **ATENÇÃO paleográfica — `Sego` mal lido como `Lego`**: nestes manuscritos o `S` maiúsculo cursivo parece um `L`. Se leres a palavra `"Lego"` junto ao nome de alguém (ex: antes de `cr.`), trata-se na verdade de `"Sego"` (grafia antiga para Cego). Não faz parte do nome! Retira do nome e coloca obrigatoriamente `"cego"` em `observacoes`. \
 **`Mudo` / `mudo`** que apareça junto ao nome: indica que a pessoa é muda. Não faz parte do nome! Retira obrigatoriamente do nome e coloca `"mudo"` ou `"muda"` em `observacoes`. \
 **`Ama`** que apareça junto ao nome de uma criada indica a sua função de ama (ama de leite \
@@ -779,19 +779,19 @@ def build_table(pages_data: list[dict]) -> list[dict]:
                 nome_original = (pessoa.get("nome_original") or "").strip()
                 nome_expandido = (pessoa.get("nome_expandido") or "").strip()
                 tem_f_al = bool(_f_al_re.search(" ".join([nome_original, nome_expandido, obs_pessoa])))
+                tem_oficial_explicito = bool(re.search(r"(?i)\bo[fe]c?ç?ial\b", " ".join([nome_original, nome_expandido])))
 
-                # "oficial" não é grau de parentesco — vai para observacoes.
-                # Para mulheres, f.al é leitura errada de f.ª (filha).
-                if parentesco == "oficial":
-                    if sexo == "F":
-                        parentesco = "filha"
-                    else:
-                        parentesco = "outro"
-                        if tem_f_al and "oficial" not in obs_pessoa.lower():
-                            obs_pessoa = "; ".join(filter(None, ["oficial", obs_pessoa]))
-                elif "oficial" in obs_pessoa.lower() and not tem_f_al:
-                    # Evita "oficial" sem evidência textual explícita de f.al.
-                    obs_pessoa = re.sub(r"(?i)\boficial\b", "", obs_pessoa)
+                # Lida com o falso positivo "f.al" (oficial) em mulheres, que costuma ser leitura errada de "f.ª" (filha)
+                if parentesco == "oficial" and sexo == "F" and tem_f_al and not tem_oficial_explicito:
+                    parentesco = "filha"
+                # Apenas removemos "oficial" de parentesco se for um falso positivo originado de "f.al" num homem?
+                # A pedido do utilizador, "oficial" deve manter-se como parentesco quando explicitamente escrito.
+                elif parentesco == "oficial" and tem_f_al and not tem_oficial_explicito:
+                    parentesco = "outro"
+                    if "oficial" not in obs_pessoa.lower():    
+                        obs_pessoa = "; ".join(filter(None, ["oficial", obs_pessoa]))
+                elif "oficial" in obs_pessoa.lower() and not (tem_f_al or tem_oficial_explicito):
+                    # Evita "oficial" sem evidência textual explícita.
                     obs_pessoa = re.sub(r"\s*;\s*;\s*", "; ", obs_pessoa)
                     obs_pessoa = re.sub(r"^\s*;\s*|\s*;\s*$", "", obs_pessoa).strip()
 
@@ -846,6 +846,8 @@ def build_table(pages_data: list[dict]) -> list[dict]:
         r["Fogo"] for r in rows
         if "ausente" in r["Observações"].lower()
         or "preso" in r["Observações"].lower()
+        or "separado" in r["Observações"].lower()
+        or "separada" in r["Observações"].lower()
     }
     for r in rows:
         if (
@@ -1025,6 +1027,19 @@ def build_table(pages_data: list[dict]) -> list[dict]:
             obs = re.sub(r"\s*;\s*;\s*", "; ", obs)
             obs = re.sub(r"^\s*;\s*|\s*;\s*$", "", obs).strip()
             r["Observações"] = obs
+
+    # ------------------------------------------------------------------
+    # Pós-processamento: "Maximo" lido em vez de "Marinho"
+    # O modelo lê frequentemente a grafia cursiva de "Marinho" como "Maximo".
+    # Substituímos sempre no nome expandido.
+    # ------------------------------------------------------------------
+    _maximo_re = re.compile(r"\bMaximo\b", re.IGNORECASE)
+    _ierey_re = re.compile(r"\bIerey\b", re.IGNORECASE)
+    for r in rows:
+        if bool(_maximo_re.search(r["NomeAtualizado"])):
+            r["NomeAtualizado"] = _maximo_re.sub("Marinho", r["NomeAtualizado"])
+        if bool(_ierey_re.search(r["NomeAtualizado"])):
+            r["NomeAtualizado"] = _ierey_re.sub("Jesus", r["NomeAtualizado"])
 
     # ------------------------------------------------------------------
     # Pós-processamento: resolver cadeia de sub-fogos
