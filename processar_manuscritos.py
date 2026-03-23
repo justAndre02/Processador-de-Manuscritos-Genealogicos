@@ -276,10 +276,9 @@ Não uses "casado/a" para uma cabeça que aparece explicitamente marcada com `V.
 **`V.º`/`V.ª` aplica-se a QUALQUER pessoa — não só à cabeça**: um criado, criada, irmão, \
 irmã, filho, filha com `V.º`/`V.ª` explícito tem SEMPRE `estado_civil="viúvo"`/`"viúva"`, \
 independentemente do parentesco. A regra de omissão (criado → solteiro) só se aplica \
-quando NENHUM marcador de estado civil aparece no manuscrito — um `V.º` escrito SEMPRE prevalece.
 6. **Observações especiais** que aparecem depois do nome e vão para o campo Observações \
 (não para os outros campos): sp. / Sep. / sep. / Se.p / se.p = separado/separada; \
-mentecapto; cego; mudo; forasteiro; deslocado; menor (m.); demente; [ilegível]; etc. \
+mentecapto; cego; mudo; forasteiro; deslocado; menor (m.); ausente (aus.te, auz.te); demente; [ilegível]; etc. \
 **ATENÇÃO paleográfica — `Sego` mal lido como `Lego`**: nestes manuscritos o `S` maiúsculo cursivo parece um `L`. Se leres a palavra `"Lego"` junto ao nome de alguém (ex: antes de `cr.`), trata-se na verdade de `"Sego"` (grafia antiga para Cego). Não faz parte do nome! Retira do nome e coloca obrigatoriamente `"cego"` em `observacoes`. \
 **`Mudo` / `mudo`** que apareça junto ao nome: indica que a pessoa é muda. Não faz parte do nome! Retira obrigatoriamente do nome e coloca `"mudo"` ou `"muda"` em `observacoes`. \
 **`Ama`** que apareça junto ao nome de uma criada indica a sua função de ama (ama de leite \
@@ -478,11 +477,12 @@ explicitamente `f.al` (ou variante paleográfica inequívoca da mesma sigla). \
 5. `sp.` / `Sep.` / `sep.` / `Se.p` / `se.p` após um nome = a pessoa está separada → \
 coloca **"separado"** (se `sexo` = M) ou **"separada"** (se `sexo` = F) em `observacoes`; \
 o `estado_civil` mantém-se normalmente "casado/a".
-6. **Cônjuge ausente ou preso** (`abz.` / `obz.` são a mesma abreviatura — ambas = ausente): \
+6. **Ausente ou Preso** (`aus.te` / `auz.te` / `ausente` / `abz.` / `obz.`): \
+   - `aus.te` ou `auz.te` no final de uma linha = a própria pessoa está ausente → coloca `"ausente"` em `observacoes`. \
    - `hom. abz.` / `hom. obz.` após o nome de uma mulher = o marido está ausente → coloca `"homem ausente"` em `observacoes`. \
    - `hom. prezo` / `hom. prez.` após o nome de uma mulher = o marido está preso → coloca `"homem preso"` em `observacoes`. \
    - `m.er abz.` / `m.er obz.` após o nome de um homem = a mulher está ausente → coloca `"mulher ausente"` em `observacoes`. \
-   Em todos estes casos, `estado_civil` mantém-se "casado/a".
+   Nos casos de cônjuge (hom. ou m.er), o `estado_civil` mantém-se "casado/a".
 6. **Estado civil por omissão**: se o estado civil não estiver explicitamente indicado \
 no manuscrito, aplica esta regra:
    - Parentesco **filho, filha, irmão, irmã, criado, criada, servo, serva, neto, neta, sobrinho, sobrinha, afilhado, afilhada** \
@@ -582,6 +582,7 @@ marcador de parentesco explícito (`Ir.`, `f.º`, etc.) e sem marcador `//`. \
 Se o parentesco for genuinamente desconhecido, usa `"desconhecido"`, não `"irmão/irmã"`.
 8. **`f.º m.` / `f.ª m.` e `m.` isolado**: `m.` (em qualquer posição após o nome) significa \
 **"menor"** (criança isenta de confissão) — coloca `"menor"` em `observacoes`. \
+CUIDADO: a sigla `"aus.te"` ou `"auz.te"` significa `"ausente"`, não confundas com `"m."` (menor). \
 Se precedido de `f.º`/`f.ª`, o parentesco fica `"filho"`/`"filha"`; \
 se `m.` aparecer isolado sem indicação de parentesco, determina o parentesco pelo contexto normal. \
 **`m.` NUNCA significa "mãe"** — se o manuscrito referir a mãe, estará escrito por extenso como `Mãe`, `mãi`, `May`, `Mai`, `Mae` ou `Maj` (ver Regra 7). \
@@ -967,6 +968,36 @@ def build_table(pages_data: list[dict]) -> list[dict]:
     for r in rows:
         if _cicrava_pat.search(r["Observações"]):
             r["Observações"] = _cicrava_pat.sub("Escrava", r["Observações"])
+
+    # ------------------------------------------------------------------
+    # Pós-processamento: "aus.te" lido no nome ou não movido para observações
+    # Transfere para observações e remove de nome. Se "menor" aparecer por
+    # confusão com "m." ou erro de leitura do final, limpamos se for exclusivo.
+    # ------------------------------------------------------------------
+    _auste_pat = re.compile(r'\bau[sz]\.?t[ea]\b', re.IGNORECASE)
+    for r in rows:
+        has_auste = False
+        if _auste_pat.search(r["NomeOriginal"]):
+            r["NomeOriginal"] = _auste_pat.sub("", r["NomeOriginal"]).strip()
+            r["NomeOriginal"] = re.sub(r'\s+', ' ', r["NomeOriginal"])
+            r["NomeAtualizado"] = re.sub(r'(?i)\bausente\b', '', r["NomeAtualizado"]).strip()
+            r["NomeAtualizado"] = _auste_pat.sub("", r["NomeAtualizado"]).strip()
+            r["NomeAtualizado"] = re.sub(r'\s+', ' ', r["NomeAtualizado"])
+            has_auste = True
+            
+        if _auste_pat.search(r["Observações"]):
+            r["Observações"] = _auste_pat.sub("", r["Observações"]).strip()
+            has_auste = True
+            
+        if has_auste:
+            # Adicionar ausente
+            if "ausente" not in r["Observações"].lower():
+                r["Observações"] = "; ".join(filter(None, [r["Observações"], "ausente"]))
+            # Remover "menor" se for erro provável por "aus.te"
+            if "menor" in r["Observações"].lower():
+                obs = re.sub(r'(?i)\bmenor\b', '', r["Observações"])
+                obs = re.sub(r'\s*;\s*;\s*', '; ', obs)
+                r["Observações"] = re.sub(r'^\s*;\s*|\s*;\s*$', '', obs).strip()
 
     # ------------------------------------------------------------------
     # Pós-processamento: irmão/irmã com "cunhado/a" nas observações
