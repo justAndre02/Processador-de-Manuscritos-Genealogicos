@@ -421,6 +421,12 @@ assemelha-se a `C`. Se leste `"Cajo"`, `"Caio"` ou forma semelhante após `S.` (
 e o resultado não for um nome de santo ou apelido português reconhecível, \
 reconsidera: quase certamente é `"Paio"` (Santo Paio = São Pelayo). \
 Exemplo: `"Maria de S. Cajo"` → `nome_expandido="Maria de São Paio"`.
+**Atenção paleográfica — `Ilena Iosefa` / `Ilena Josefa`**: o nome `Ilena` (variante arcaica de Helena) \
+tem um `I` maiúsculo cursivo que é comumente mal lido como `M`, podendo transformar "Ilena" \
+em "Maria". Além disso, o segundo nome `Iosefa` ou `Josefa` confunde-se facilmente com `Iozé` ou `José` (com a laçada inferior do f confundida com a de um z). \
+Se leste a combinação `"Maria Iozé"` ou `"Maria José"`, reconsidera os traços iniciais: se as \
+palavras originais parecerem ter a laçada inferior característica de Josefa/Iosefa e começar por I em vez de M (Ilena), o `nome_original` \
+é **"Ilena Josefa"** (ou "Ilena Iosefa"), mas o `nome_expandido` DEVE ser obrigatoriamente **"Helena Josefa"**.
 2. Expande as abreviaturas do NOME em `nome_expandido` usando a tabela fornecida. \
 **Atenção a formas com determinante colado**: `daS.a` / `daS.º` → "da Silva"; \
 `de A.` / `de Ar.º` → "de Araújo"; `doS.` → "do Sousa"; etc. \
@@ -477,12 +483,12 @@ explicitamente `f.al` (ou variante paleográfica inequívoca da mesma sigla). \
 5. `sp.` / `Sep.` / `sep.` / `Se.p` / `se.p` após um nome = a pessoa está separada → \
 coloca **"separado"** (se `sexo` = M) ou **"separada"** (se `sexo` = F) em `observacoes`; \
 o `estado_civil` mantém-se normalmente "casado/a".
-6. **Ausente ou Preso** (`aus.te` / `auz.te` / `ausente` / `abz.` / `obz.`): \
-   - `aus.te` ou `auz.te` no final de uma linha = a própria pessoa está ausente → coloca `"ausente"` em `observacoes`. \
+6. **Ausente ou Preso** (`aus.te` / `auz.te` / `ausente` / `abz.` / `obz.` / `abz.te`): \
+   - `aus.te` ou `auz.te` / `abz.te` no final de uma linha = a própria pessoa está ausente → coloca `"ausente"` em `observacoes`. \
    - `hom. abz.` / `hom. obz.` após o nome de uma mulher = o marido está ausente → coloca `"homem ausente"` em `observacoes`. \
    - `hom. prezo` / `hom. prez.` após o nome de uma mulher = o marido está preso → coloca `"homem preso"` em `observacoes`. \
-   - `m.er abz.` / `m.er obz.` após o nome de um homem = a mulher está ausente → coloca `"mulher ausente"` em `observacoes`. \
-   Nos casos de cônjuge (hom. ou m.er), o `estado_civil` mantém-se "casado/a".
+   - `m.er abz.` / `m.er obz.` / `m.er abz.te` / `m.er aus.te` / `cas. m.er abz.te` após o nome de um homem = a mulher está ausente → coloca `"mulher ausente"` em `observacoes`. \
+   Nos casos de cônjuge (hom. ou m.er), não assinales como solteiro/a, o `estado_civil` tem de ser OBRIGATORIAMENTE "casado" / "casada", porque se a mulher ou marido estão ausentes, eles estão casados.
 6. **Estado civil por omissão**: se o estado civil não estiver explicitamente indicado \
 no manuscrito, aplica esta regra:
    - Parentesco **filho, filha, irmão, irmã, criado, criada, servo, serva, neto, neta, sobrinho, sobrinha, afilhado, afilhada** \
@@ -498,7 +504,7 @@ a mulher fica com `estado_civil="casada"`. Nunca uses "casado" para anular um `V
 aplica esta hierarquia estrita: \
      1. Se identificaste explicitamente **solteiro/solteira** (`S.º`/`soltr.`/`solt.`) → usa `"solteiro/a"`. \
      2. Se identificaste explicitamente **viúvo/viúva** (`V.ª`/`V.o`/`viu.`/etc.) → usa `"viúvo/a"`. \
-     3. Se identificaste `cas.`/`caz.` explícito OU cônjuge ausente/preso (`hom. abz.`/`hom. prezo`/`m.er abz.`) → usa `"casado/a"`. \
+     3. Se identificaste `cas.`/`caz.` explícito OU cônjuge ausente/preso (`hom. abz.`/`hom. prezo`/`m.er abz.`/`m.er abz.te`) → usa `"casado/a"`. \
      4. **Em QUALQUER outro caso** (incluindo quando serias tentado a escrever "casado/a" \
 sem marcador explícito) → usa **`"viúvo"`** (se sexo M) ou **`"viúva"`** (se sexo F). \
 Justificação: o modelo confunde `V.ª` (viúva) com abreviaturas de casado/a, mas raramente \
@@ -541,6 +547,7 @@ sido identificado antes do nome. Aplica estas correcções: \
    - Acrescenta `"Padre"` a `observacoes` (para além de `"D.M."` que já lá fica). \
    - Define `estado_civil = "solteiro"`. \
    - `confessou = "sim"` (como qualquer outra palavra nessa posição). \
+**EXCEPÇÃO IMPORTANTE**: Se a pessoa for identificada com a palavra "Reverendo" (`R.do` / `Rev.do`), **NÃO acrescentes** `"Padre"` às observações por causa do `D.M.` — nesses casos, mantém a pessoa Apenas como Reverendo (não Padre). \
 **Atenção paleográfica**: `o P.e` antes do nome é frequentemente lido como `D.` (Dom) — \
 se a abreviatura inicial antes do nome parece `D.` mas a pessoa tem `D.M.` na posição de \
 confissão, é muito provável que o `D.` seja `o P.e` mal lido. Nesse caso, `"Dom"` / `"D."` \
@@ -549,6 +556,7 @@ NÃO entra no nome; o nome começa na palavra a seguir.
 (quer em cabeça `#` quer em sub-fogo `//`, quer em membro não-cabeça), coloca `"Reverendo"` \
 em `observacoes` — **nunca omitas este marcador**. Não faz parte do `nome_original` nem do \
 `nome_expandido`. Se a mesma pessoa tiver também `P.e`, ambos vão para `observacoes`: `"Reverendo, Padre"`. \
+Se tiver a marca da confissão `D.M.`, a pessoa já está identificada como `Reverendo`, portanto não deve ser inferida como "Padre". \
 Exemplo: `11. R.do Iozé P.e` → `nome_original="Iozé"`, `observacoes="Reverendo, Padre"`.
 7e. **`L.do` / `oL.do` / `Lic.do` (Licenciado)**: quando `L.do`, `oL.do` ou `Lic.do` aparecer \
 antes de um nome, coloca `"Licenciado"` em `observacoes` — **nunca omitas este marcador**. \
@@ -886,12 +894,13 @@ def build_table(pages_data: list[dict]) -> list[dict]:
     # D.M. é marcador consistente de padre; o modelo frequentemente lê
     # "o P.e" como "D." (Dom/Dona) e não identifica a pessoa como padre.
     # A detecção usa regex para cobrir variantes (D.M., d.m., D. M., DM).
+    # EXCEPÇÃO: Se a pessoa já está identificada como Reverendo, não adiciona "Padre".
     # ------------------------------------------------------------------
     _dm_pat = re.compile(r'\bD\.?\s*M\.?', re.IGNORECASE)
     _dona_prefix = re.compile(r'^(Dom|Dona|D\.)\s+', re.IGNORECASE)
     for r in rows:
         obs = r["Observações"]
-        if _dm_pat.search(obs) and "Padre" not in obs:
+        if _dm_pat.search(obs) and "Padre" not in obs and "Reverendo" not in obs:
             r["Observações"] = "Padre; " + obs
             r["EstadoCivil"] = "solteiro"
             r["Sexo"] = "M"   # padres são sempre do sexo masculino

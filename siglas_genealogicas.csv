@@ -44,6 +44,7 @@ Roiz / Riz,Rodrigues,apelidos,apelido,"""João Roiz""",-iz indica Rodrigues
 R.o,Rodrigo,nomes próprios,nome,"""R.o Pereira""",abreviado
 Rib.ro / Rib. / Ribr.o,Ribeiro,apelidos,apelido,"""António Rib.ro""",forma clara
 P.ra / P.ª / Pr.ª / Pr.a,Pereira,apelidos,apelido,"""João P.ra"" / ""Anna Pr.ª""",muito frequente; Pr.ª é variante comum nestes registos
+doSá / dSá / doSª,do Sá,apelidos,apelido,registos paroquiais séc. XVII-XVIII,"apelido de origem toponímica; grafia dSá → actualizar para do Sá"
 Vas.cos,Vasconcelos,apelidos,apelido,"""João Vas.cos""",encurtamento
 Fon.ca,Fonseca,apelidos,apelido,"""Maria Fon.ca""",abreviação comum
 Daºseca,da Fonseca,apelidos,apelido,"""António Daºseca""",º representa 'o'
@@ -119,7 +120,7 @@ Con.tras,Contreiras,apelidos,apelido,registos paroquiais séc. XVII-XVIII,apelid
 D.es,Domingues,apelidos,apelido,registos paroquiais séc. XVII-XVIII,patronímico de Domingos
 Diz,Dias,apelidos,apelido,registos paroquiais séc. XVII-XVIII,abreviatura de Dias
 Figr.a,Figueira,apelidos,apelido / topónimo,registos paroquiais séc. XVII-XVIII,não confundir com Fg.do = Figueiredo
-Fr.ª / Ferr.ª / Fr.ra / Ferr.a / Fer.ª / Frr.ª / Frr.a / Ferz.al,Ferreira,apelidos,apelido,registos paroquiais séc. XVII-XVIII,"variantes de Ferreira; apelido muito comum; o rr cursivo pode parecer rz — não confundir com Frz./Friz (Fernandes)"
+Fr.ª / Ferr.ª / Fr.ra / Ferr.a / Fer.ª / Frr.ª / Frr.a / Ferz.al /Fr.a,Ferreira,apelidos,apelido,registos paroquiais séc. XVII-XVIII,"variantes de Ferreira; apelido muito comum; o rr cursivo pode parecer rz — não confundir com Frz./Friz (Fernandes)"
 Frz / Friz,Fernandes,apelidos,apelido,registos paroquiais séc. XVII-XVIII,"patronímico de Fernando; ATENÇÃO: Frz tem apenas Fr+z; Ferr.a/Ferr.ª/Frr.ª com duas letras r = Ferreira, não Fernandes"
 G.ro / G.ra,Guerreiro / Guerreira,apelidos,apelido,registos paroquiais séc. XVII-XVIII,masc./fem. do apelido Guerreiro
 M.ca / M.ça,Mendonça,apelidos,apelido,registos paroquiais séc. XVII-XVIII,variantes de Mendonça
@@ -195,3 +196,6 @@ Maximo,Marinho,apelidos,apelido,"João Maximo / João Marinho","Erro frequente d
 Ierey,Jesus,nomes e apelidos,apelido,"Maria de Ierey","Erro frequente de leitura cursivo, onde o J é lido como I, o s cursivo intermédio lido como e/r, e o s final como y; corrigir para Jesus"
 Fr.tas / Fr.ta,Freitas,apelidos,apelido,registos paroquiais séc. XVII-XVIII,apelido frequente
 de Fr.tas / de Fr.ta, de Freitas,apelidos,apelido,registos paroquiais séc. XVII-XVIII,"variante com determinante ""de"" colado à sigla"
+Corr.a / Corr./ Corz.a / Corz, Correia, apelidos, apelido,registos paroquiais séc. XVII-XVIII, apelido frequente
+Alb.o / Alb. / Alb.e / Alb.º,Alberto,nomes próprios,nome próprio,registos paroquiais séc. XVII-XVIII,forma contraída de Alberto
+Ilena,Helena,nomes próprios,nome próprio,registos paroquiais séc. XVII-XVIII,variante arcaica/fonética de Helena que deve ser atualizada e expandida

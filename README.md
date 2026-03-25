@@ -205,3 +205,6 @@ Esta tabela é injectada no prompt enviado ao modelo e pode ser expandida à med
 - Cada PDF é convertido para imagem em memória (sem ficheiros temporários) e enviado directamente ao modelo via API multimodal
 - O modelo devolve JSON estruturado que é parseado e validado; em caso de JSON inválido, são feitas até 3 tentativas antes de ignorar a página
 - O estado (Fogo, Lugar) é preservado **entre páginas e entre PDFs distintos** — o modelo recebe o lugar actualmente em vigor como contexto para cada página, devolvendo apenas quando muda
+
+**IMPORTANTE**
+Apesar de ter uma taxa de acerto acima dos 95% os resultados estão sempre suscetiveis a erros. Revisão humana pode ser necessário.
