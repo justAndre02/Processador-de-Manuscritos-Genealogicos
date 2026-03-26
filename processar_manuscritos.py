@@ -385,6 +385,9 @@ ao `N` — se leste `N.do` após um nome, é quase certamente `M.do` = **Machado
 **`Px.to` / `Px.ª` / `Pix.to` = apelido **Peixoto`**: se aparecer após o nome próprio, faz SEMPRE \
 parte do nome e DEVE ser incluído em `nome_original` e expandido para "Peixoto" em `nome_expandido`. \
 Nunca o interpretes como parentesco, estado civil ou outro campo. \
+**Grafia `Preira` / `Pr.ira` = apelido **Pereira`**: se leres "Preira" (faltando o primeiro "e") \
+ou formas semelhantes como `Pr.ira`, trata-se de Pereira — **nunca o expandas para Peixoto**. \
+Exemplo: `"Thomé Pereira"` → `nome_expandido="Tomé Pereira"`. \
 **Nomes com `D.`/`D.ª` (Dom/Dona) — lê o nome completo**: pessoas com prefixo honorífico \
 `D.` ou `D.ª` têm frequentemente dois ou três nomes próprios e/ou apelido (ex: `"D. Anna M.a Leonor"`). \
 O `D.` ou `D.ª` DEVE constar no `nome_original` e DEVE ser EXPLICITAMENTE expandido no `nome_expandido` \
