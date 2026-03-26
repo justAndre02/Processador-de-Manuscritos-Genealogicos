@@ -385,6 +385,9 @@ ao `N` — se leste `N.do` após um nome, é quase certamente `M.do` = **Machado
 **`Px.to` / `Px.ª` / `Pix.to` = apelido **Peixoto`**: se aparecer após o nome próprio, faz SEMPRE \
 parte do nome e DEVE ser incluído em `nome_original` e expandido para "Peixoto" em `nome_expandido`. \
 Nunca o interpretes como parentesco, estado civil ou outro campo. \
+**Grafia `Preira` / `Pr.ira` = apelido **Pereira`**: se leres "Preira" (faltando o primeiro "e") \
+ou formas semelhantes como `Pr.ira`, trata-se de Pereira — **nunca o expandas para Peixoto**. \
+Exemplo: `"Thomé Preira de Pereira"` → `nome_expandido="Tomé Pereira de Pereira"`. \
 **Nomes com `D.`/`D.ª` (Dom/Dona) — lê o nome completo**: pessoas com prefixo honorífico \
 `D.` ou `D.ª` têm frequentemente dois ou três nomes próprios e/ou apelido (ex: `"D. Anna M.a Leonor"`). \
 O `D.` ou `D.ª` DEVE constar no `nome_original` e DEVE ser EXPLICITAMENTE expandido no `nome_expandido` \
@@ -1075,11 +1078,18 @@ def build_table(pages_data: list[dict]) -> list[dict]:
     # ------------------------------------------------------------------
     _maximo_re = re.compile(r"\bMaximo\b", re.IGNORECASE)
     _ierey_re = re.compile(r"\bIerey\b", re.IGNORECASE)
+    _preira_re = re.compile(r"\bPreira\b", re.IGNORECASE)
+    _peixoto_re = re.compile(r"\bPeixoto\b", re.IGNORECASE)
     for r in rows:
         if bool(_maximo_re.search(r["NomeAtualizado"])):
             r["NomeAtualizado"] = _maximo_re.sub("Marinho", r["NomeAtualizado"])
         if bool(_ierey_re.search(r["NomeAtualizado"])):
             r["NomeAtualizado"] = _ierey_re.sub("Jesus", r["NomeAtualizado"])
+        if bool(_preira_re.search(r["NomeAtualizado"])):
+            r["NomeAtualizado"] = _preira_re.sub("Pereira", r["NomeAtualizado"])
+        elif bool(_preira_re.search(r["NomeOriginal"])) and bool(_peixoto_re.search(r["NomeAtualizado"])):
+            # Nome original sugere Pereira mas foi expandido como Peixoto — normaliza para Pereira.
+            r["NomeAtualizado"] = _peixoto_re.sub("Pereira", r["NomeAtualizado"])
 
     # ------------------------------------------------------------------
     # Pós-processamento: resolver cadeia de sub-fogos
