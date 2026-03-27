@@ -186,8 +186,9 @@ deCarv.o / deCarv.º,de Carvalho,apelidos,apelido,registos paroquiais séc. XVII
 Carvalh.o / Carvalh.º / Carv.o / Carv.º,Carvalho,apelidos,apelido,registos paroquiais séc. XVII-XVIII,"forma alternativa de abreviar 'de Carvalho'; NUNCA confundir com nome próprio Carvalho — 'Carvalh.o' ou 'Carvalh.º' após nome próprio é SEMPRE o apelido 'Carvalho' (ex: 'João Carvalh.o' → nome_expandido='João Carvalho')"
 deS.Bento, de São Bento,apelidos,apelido de devoção religiosa,registos paroquiais séc. XVII-XVIII,"apelido; NUNCA confundir com nome próprio Bento — 'deS.Bento' ou 'de S.Bento' após nome próprio é SEMPRE o apelido 'de São Bento' (ex: 'Maria deS.Bento' → nome_expandido='Maria de São Bento')"
 deS.Paio/ deS.Pajo, de São Paio,apelidos,apelido de devoção religiosa,registos paroquiais séc. XVII-XVIII,"apelido; NUNCA confundir com nome próprio Paio — 'deS.Paio' ou 'de S.Paio' após nome próprio é SEMPRE o apelido 'de São Paio' (ex: 'João deS.Paio' → nome_expandido='João de São Paio')"
+de S. do Carmo / deS.doCarmo,de Senhora do Carmo,apelidos,apelido de devoção mariana,registos paroquiais séc. XVII-XVIII,"neste contexto S. = Senhora (não São); expandir para 'de Senhora do Carmo'"
 Teix.a / Teixr.a / Teixr.ª,Teixeira,apelidos,apelido,registos paroquiais séc. XVII-XVIII,apelido frequente
-Guim.es / Guim.ª,Guimarães,apelidos,apelido,registos paroquiais séc. XVII-XVIII,apelido frequente
+Guim.es / Guim.ª / Guim.s,Guimarães,apelidos,apelido,registos paroquiais séc. XVII-XVIII,apelido frequente
 Bapt.a / Bapt.ª,Baptista,apelidos,apelido,registos paroquiais séc. XVII-XVIII,apelido frequente
 Huberta,Noberta,abreviaturas de nomes próprios,atualização ortográfica,Fran.ca Nuberta,No manuscrito está escrito Nuberta que hoje em dia passa a Noberta
 Nuberta,Noberta,abreviaturas de nomes próprios,atualização ortográfica,Fran.ca Nuberta,No manuscrito está escrito Nuberta que hoje em dia passa a Noberta
@@ -203,3 +204,6 @@ de Fr.tas / de Fr.ta, de Freitas,apelidos,apelido,registos paroquiais séc. XVII
 Corr.a / Corr./ Corz.a / Corz, Correia, apelidos, apelido,registos paroquiais séc. XVII-XVIII, apelido frequente
 Alb.o / Alb. / Alb.e / Alb.º,Alberto,nomes próprios,nome próprio,registos paroquiais séc. XVII-XVIII,forma contraída de Alberto
 Ilena,Helena,nomes próprios,nome próprio,registos paroquiais séc. XVII-XVIII,variante arcaica/fonética de Helena que deve ser atualizada e expandida
+Alex.e,Alexandre,nomes próprios,nome próprio,registos paroquiais séc. XVII-XVIII,forma contraída de Alexandre
+Felg.a / Felg.ª /Felgr.a, Felgueira, apelidos, apelido, registos paroquiais séc. XVII-XVIII, apelido frequente 
+Dem.te,Demente,observações,condição de saúde,registos paroquiais séc. XVII-XVIII,"vai para Observações como ""demente"""

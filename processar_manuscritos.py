@@ -250,6 +250,9 @@ isolado após o nome é SEMPRE parentesco **"filho"** — mesmo que outras abrev
 `Ir.` / `ir.` / `Ir.ª` / `ir.ª` = **irmão/irmã** — o `I` cursivo pode parecer `f`, mas `Ir.` tem SEMPRE duas letras (`I`+`r`), enquanto `f.` filho é uma única letra `f` isolada. \
 Nunca uses `"filho"` quando a abreviatura tiver duas ou mais letras (ex: `Ir.`, `Frz.`). \
 **Atenção inversa de erro de leitura**: se a imagem contiver APENAS `"f.o"` (ou `f.`) o modelo não pode confundir com `Ir.` (irmão) ou ignorá-lo; `f.o` significa sempre parentesco **"filho"**. O `I` e `r` não constam lá. \
+**Sequência colada `f.oDem.te` (ou `f.o Dem.te`)**: interpreta obrigatoriamente como duas siglas: \
+`f.o` = parentesco `"filho"` e `Dem.te` = observação `"demente"`. \
+NUNCA converter `Dem.te` em `"menor"` neste contexto. \
 Exemplo concreto: a linha **"João da Costa f.° caz. Sep."** deve produzir \
 `nome_original="João da Costa"`, `parentesco="filho"`, `estado_civil="casado"`, \
 `observacoes="separado"` — o `f.°` define o parentesco, `caz.` o estado civil, `Sep.` a observação.
@@ -292,6 +295,8 @@ ou "escravo" (M) em `observacoes`; `parentesco` mantém-se "criada"/"criado". \
 **ATENÇÃO paleográfica — `Escrava` lida como `Cicrava`**: o `E` cursivo maiúsculo parece `C`, \
 e o `s` parece `i`, tornando "Escrava" em "Cicrava". "Cicrava" não existe em português — \
 se leste "Cicrava" ou forma semelhante, é SEMPRE "Escrava".
+**`Dem.te` = demente (não menor)**: quando aparecer `Dem.te` (isolado ou colado a `f.o`), \
+regista `"demente"` em `observacoes`. Não substituir por `"menor"`.
 7. **Sequências de abreviaturas junto ao nome**: quando várias abreviaturas aparecem \
 consecutivamente após o nome (ex: `sobr.º V.º F.`), analisa cada uma independentemente \
 e preenche o campo correcto para cada: \
@@ -429,6 +434,9 @@ assemelha-se a `C`. Se leste `"Cajo"`, `"Caio"` ou forma semelhante após `S.` (
 e o resultado não for um nome de santo ou apelido português reconhecível, \
 reconsidera: quase certamente é `"Paio"` (Santo Paio = São Pelayo). \
 Exemplo: `"Maria de S. Cajo"` → `nome_expandido="Maria de São Paio"`.
+**`de S. do Carmo`**: nesta fórmula onomástica, `S.` significa **Senhora** (devoção mariana), \
+não `São`. Portanto, `de S. do Carmo` deve ser expandido para **`de Senhora do Carmo`** \
+e NUNCA para `de São do Carmo`.
 **Atenção paleográfica — `Ilena Iosefa` / `Ilena Josefa`**: o nome `Ilena` (variante arcaica de Helena) \
 tem um `I` maiúsculo cursivo que é comumente mal lido como `M`, podendo transformar "Ilena" \
 em "Maria". Além disso, o segundo nome `Iosefa` ou `Josefa` confunde-se facilmente com `Iozé` ou `José` (com a laçada inferior do f confundida com a de um z). \
@@ -618,6 +626,7 @@ Exemplo concreto: `"Francisco Jozé f.º m."` → `nome_original="Francisco Joz�
 8b. **Enjeitado/a** (`enjeitado`, `enjeitada`, `Ing.`, `Ingeitado`, `Ingeitada` ou variantes): \
 criança abandonada acolhida no fogo. `parentesco` = `"outro"`; \
 coloca `"enjeitado"` (sexo M) ou `"enjeitada"` (sexo F) em `observacoes`. \
+Estes termos **NUNCA** fazem parte de `nome_original` ou `nome_expandido`; remove-os sempre do nome. \
 Exemplo: `"Florinda Ingeitada m."` → `parentesco="outro"`, `observacoes="enjeitada, menor"`.
 8c. **Escudeiro** (`Escudr.o` / `Escudr.º` / `Ecudr.º` / `Escudro` / `Escudiero`): \
 título/função de criado nobre → coloca "Escudeiro" em `observacoes`; \
@@ -1193,6 +1202,38 @@ def build_table(pages_data: list[dict]) -> list[dict]:
             r["Observações"] = obs
 
     # ------------------------------------------------------------------
+    # Pós-processamento: evitar combinação impossível "mulher" + "mãe"
+    # Se o parentesco já é "mulher" (esposa), qualquer marcador de mãe
+    # nas observações é ruído de leitura e deve ser removido.
+    # ------------------------------------------------------------------
+    _mae_obs_re = re.compile(r"\b(mãe|mae|mãi|may|mai|maj)\b", re.IGNORECASE)
+    for r in rows:
+        if r["Parentesco"] != "mulher":
+            continue
+        if not _mae_obs_re.search(r["Observações"]):
+            continue
+        obs = _mae_obs_re.sub("", r["Observações"])
+        obs = re.sub(r"\s*;\s*;\s*", "; ", obs)
+        r["Observações"] = re.sub(r"^\s*;\s*|\s*;\s*$", "", obs).strip()
+
+    # ------------------------------------------------------------------
+    # Pós-processamento: Dem.te (demente) e sequência f.oDem.te
+    # - Normaliza Dem.te/demte para "demente" em observações.
+    # - Se há demente e o parentesco ficou outro/desconhecido, corrige para filho.
+    # ------------------------------------------------------------------
+    _demente_obs_re = re.compile(r"\b(?:dem\.?te|demente)\b", re.IGNORECASE)
+    for r in rows:
+        if _demente_obs_re.search(r["Observações"]):
+            r["Observações"] = _demente_obs_re.sub("demente", r["Observações"])
+            # Se houver ruído "menor" junto de Dem.te, prioriza demente.
+            r["Observações"] = re.sub(r"(?i)\bmenor\b", "", r["Observações"])
+            r["Observações"] = re.sub(r"\s*;\s*;\s*", "; ", r["Observações"])
+            r["Observações"] = re.sub(r"^\s*;\s*|\s*;\s*$", "", r["Observações"]).strip()
+
+            if r["Parentesco"] in ("", "outro", "desconhecido"):
+                r["Parentesco"] = "filho"
+
+    # ------------------------------------------------------------------
     # Pós-processamento: "Maximo" lido em vez de "Marinho"
     # O modelo lê frequentemente a grafia cursiva de "Marinho" como "Maximo".
     # Substituímos sempre no nome expandido.
@@ -1204,6 +1245,58 @@ def build_table(pages_data: list[dict]) -> list[dict]:
             r["NomeAtualizado"] = _maximo_re.sub("Marinho", r["NomeAtualizado"])
         if bool(_ierey_re.search(r["NomeAtualizado"])):
             r["NomeAtualizado"] = _ierey_re.sub("Jesus", r["NomeAtualizado"])
+
+    # ------------------------------------------------------------------
+    # Pós-processamento: "de S. do Carmo" expandido incorretamente como
+    # "de São do Carmo". Neste contexto, S. = Senhora.
+    # ------------------------------------------------------------------
+    _s_carmo_orig = re.compile(r'\bde\s+S\.\s+do\s+Carmo\b', re.IGNORECASE)
+    _sao_carmo_expd = re.compile(r'\bde\s+S[aã]o\s+do\s+Carmo\b', re.IGNORECASE)
+    for r in rows:
+        if not _s_carmo_orig.search(r["NomeOriginal"]):
+            continue
+        if _sao_carmo_expd.search(r["NomeAtualizado"]):
+            r["NomeAtualizado"] = _sao_carmo_expd.sub("de Senhora do Carmo", r["NomeAtualizado"])
+
+    # ------------------------------------------------------------------
+    # Pós-processamento: "Ingeitado/a" e "Enjeitado/a" não fazem parte do nome
+    # Mantém o termo apenas em observações, com género coerente.
+    # ------------------------------------------------------------------
+    _enjeitado_nome_pat = re.compile(
+        r'\b(?:ing[e]?itad[oa]|engeitad[oa]|enjeitad[oa])\b',
+        re.IGNORECASE,
+    )
+    _enjeitado_obs_pat = re.compile(r'\benjeitad[oa]\b', re.IGNORECASE)
+    for r in rows:
+        found_in_nome = False
+
+        if _enjeitado_nome_pat.search(r["NomeOriginal"]):
+            r["NomeOriginal"] = _enjeitado_nome_pat.sub("", r["NomeOriginal"])
+            r["NomeOriginal"] = re.sub(r'\s+', ' ', r["NomeOriginal"]).strip()
+            found_in_nome = True
+
+        if _enjeitado_nome_pat.search(r["NomeAtualizado"]):
+            r["NomeAtualizado"] = _enjeitado_nome_pat.sub("", r["NomeAtualizado"])
+            r["NomeAtualizado"] = re.sub(r'\s+', ' ', r["NomeAtualizado"]).strip()
+            found_in_nome = True
+
+        if not found_in_nome and not _enjeitado_obs_pat.search(r["Observações"]):
+            continue
+
+        termo = "enjeitada" if r["Sexo"] == "F" else "enjeitado"
+
+        # Remove variações duplicadas nas observações e volta a inserir normalizado.
+        obs_clean = re.sub(
+            r'(?i)\b(?:ing[e]?itad[oa]|engeitad[oa]|enjeitad[oa])\b',
+            '',
+            r["Observações"],
+        )
+        obs_clean = re.sub(r'\s*;\s*;\s*', '; ', obs_clean)
+        obs_clean = re.sub(r'^\s*;\s*|\s*;\s*$', '', obs_clean).strip()
+        r["Observações"] = "; ".join(filter(None, [obs_clean, termo]))
+
+        if r["Parentesco"] in ("", "desconhecido"):
+            r["Parentesco"] = "outro"
 
     # ------------------------------------------------------------------
     # Pós-processamento: resolver cadeia de sub-fogos
