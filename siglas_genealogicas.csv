@@ -27,8 +27,10 @@ D. / D.ª / D.n,Dom / Dona,tratamentos/títulos,tratamento honorífico,assinatur
 Fr. / Fri.,Frei,tratamentos/títulos,título religioso,registos conventuais,Variante frade
 ob. / ol. / oP.e / P.e,Padre,tratamentos/títulos,título religioso,assento paroquial,Usado em cabeçalhos (ob. ou ol. são frequentemente erros de leitura para oP.e)
 oR.do / R.do,o Reverendo / Reverendo,tratamentos/títulos,título religioso,documentos eclesiásticos,oR.do inclui o artigo "o"; vai para o nome expandido
+Arcip. / Arcipreste / Arcipr.e,Arcipreste,tratamentos/títulos,título eclesiástico,rol de confessados séc. XVIII,"vai para Observações como ""Arcipreste""; não entra no nome"
 D.or / Dr. / D.tor,Doutor,tratamentos/títulos,título académico,documentos jurídicos,Notariais
 oD.or / o D.tor, o Doutor,tratamentos/títulos,título académico,documentos jurídicos,Notariais,Variante com artigo "o"
+oManjor / o Major / Manjor / Major,Major,tratamentos/títulos,título militar,rol de confessados séc. XVIII,"vai para Observações como ""Major""; nunca entra no nome; não confundir com Doutor nem Manoel"
 serv. / serva,servo / serva,termos administrativos,status social,"""Manuel, servo de …""",escravo
 subjecto / subjecta,subjecto,termos administrativos,escravo (latim),documentos coloniais,forma latinizada
 mor. / morador,morador,termos administrativos,residência,"""mor. da rua …""",residência local
@@ -63,6 +65,7 @@ Caixr.o / Caixr / Caxr.o,Caixeiro,parentesco,profissão,rol de confessados séc.
 Mestre,mestre,parentesco,profissão,rol de confessados séc. XVIII,vai para Parentesco como "mestre" e não para Observações
 Apdz. / Aprendiz,aprendiz,parentesco,profissão,rol de confessados séc. XVIII,vai para Parentesco como "aprendiz" e não para Observações
 Aja / Aia / Aja.,Aia,termos administrativos,profissão / condição,rol de confessados séc. XVIII,"vai para Observações como ""Aia""; o parentesco passa a ser ""criada"""
+Sacrist. / Sacristão / Sacrista,Sacristão,tratamentos/títulos,função eclesiástica,rol de confessados séc. XVIII,"vai para Observações como ""Sacristão""; não entra no nome"
 oleiro / olei.ro,oleiro,termos administrativos,profissão,"""Francisco oleiro""",pode abreviar
 cr.o / cr.ª,criado / criada,termos administrativos,servente doméstico,"""Miguel cr.o""",criado doméstico
 m.er / mul.,mulher,parentesco,esposa,"""Ana m.er de …""",esposa

@@ -343,6 +343,11 @@ estado civil (S.º, cas., viu., etc.) no nome — essas vão para as colunas cor
 **`P.e` / `o P.e` NUNCA faz parte do nome** — vai OBRIGATORIAMENTE para `observacoes` como `"Padre"` (ver Regra 7). \
 **Atenção paleográfica — `oP.e` mal lido como `ob.`, `ol.` ou `R.do`**: o prefixo `oP.e` \
 pode assemelhar-se a `ob.`, `ol.` ou até `R.do` devido à grande laçada do 'P'. Se a primeira palavra antes de um nome for lida como `ob.`, `ol.` ou `R.do`, é quase certamente `oP.e` (o Padre). Tem de ser removido do nome e colocado como `"Padre"` nas `observacoes`. \
+**Atenção paleográfica — `oP.e Sacristão Ant.o` mal lido como `D. Iacinta Ant.a`**: \
+em algumas linhas o conjunto `oP.e` + `Sacristão` é indevidamente lido como `D.` + `Iacinta`. \
+Nestes casos, `Iacinta` não é nome: deve ir para `observacoes` como `"Sacristão"` e o título \
+eclesiástico deve ser `"Padre"`. Além disso, quando o nome real é `Ant.o` (António), \
+nunca converter para `Ant.a` (Antónia).
 **ATENÇÃO ESPECIAL**: `Pr.ª` / `Pr.a` / `P.ª` / `P.ra` são abreviaturas do apelido **Pereira** \
 e fazem SEMPRE parte do nome — nunca as omitas, nunca as interpretes como parentesco. \
 Se o manuscrito tiver "Anna Pr.ª", `nome_original` = "Anna Pr.ª" e `nome_expandido` = "Anna Pereira". \
@@ -558,9 +563,14 @@ NÃO entra no nome; o nome começa na palavra a seguir.
 7d. **`R.do` / `Rev.do` (Reverendo)**: quando `R.do` ou `Rev.do` aparecer antes de um nome \
 (quer em cabeça `#` quer em sub-fogo `//`, quer em membro não-cabeça), coloca `"Reverendo"` \
 em `observacoes` — **nunca omitas este marcador**. Não faz parte do `nome_original` nem do \
-`nome_expandido`. Se a mesma pessoa tiver também `P.e`, ambos vão para `observacoes`: `"Reverendo, Padre"`. \
+`nome_expandido`. **Se a mesma pessoa tiver também `P.e`, mantém apenas `"Reverendo"`** \
+(não acrescentes `"Padre"`, para evitar duplicação hierárquica do título eclesiástico). \
 Se tiver a marca da confissão `D.M.`, a pessoa já está identificada como `Reverendo`, portanto não deve ser inferida como "Padre". \
-Exemplo: `11. R.do Iozé P.e` → `nome_original="Iozé"`, `observacoes="Reverendo, Padre"`.
+Exemplo: `11. R.do Iozé P.e` → `nome_original="Iozé"`, `observacoes="Reverendo"`.
+7h. **`Arcip.` / `Arcipreste` / `Arcipr.e` (Arcipreste)**: quando esta sigla ou palavra \
+aparecer antes do nome, coloca `"Arcipreste"` em `observacoes` — não entra no nome. \
+Se a pessoa já estiver marcada como `"Reverendo"`, mantém ambos: `"Reverendo, Arcipreste"`. \
+`Arcip.` nunca implica `"Padre"` adicional.
 7e. **`L.do` / `oL.do` / `Lic.do` (Licenciado)**: quando `L.do`, `oL.do` ou `Lic.do` aparecer \
 antes de um nome, coloca `"Licenciado"` em `observacoes` — **nunca omitas este marcador**. \
 Não faz parte do `nome_original` nem do `nome_expandido`. O artigo `o` antes de `L.do` \
@@ -572,6 +582,12 @@ Não faz parte do `nome_original` nem do `nome_expandido`. O artigo `o` em `oD.o
 o artigo ("o Doutor"), não entra no nome. \
 Exemplo: `# oD.or Bento Iozé de Moura` → `nome_original="Bento Iozé de Moura"`, \
 `nome_expandido="Bento José de Moura"`, `observacoes="Doutor"`.
+7eb. **`oManjor` / `o Major` / `Manjor` / `Major` (Major)**: quando estas formas aparecerem \
+antes do nome, trata-se do título **Major** (cargo militar), NÃO de Doutor e NÃO de nome próprio. \
+Remove obrigatoriamente o título do `nome_original` e `nome_expandido` e coloca `"Major"` \
+em `observacoes`. \
+**Regra anti-erro obrigatória**: `oManjor`/`Manjor` NUNCA pode ser expandido para `"Doutor"` \
+nem para `"Manoel"` no nome.
 7f. **`Conego` / `Cónego` / `Can.go` / `Con.go` / `Can.º` (Cónego — Cânone)**: quando esta \
 palavra ou abreviatura aparecer antes de um nome, coloca `"Cónego"` em `observacoes` — \
 **NUNCA a incluas em `nome_original` nem `nome_expandido`**, nem como parte do nome próprio. \
@@ -928,6 +944,51 @@ def build_table(pages_data: list[dict]) -> list[dict]:
             r["Parentesco"] = _fem_to_masc.get(r["Parentesco"], r["Parentesco"])
 
     # ------------------------------------------------------------------
+    # Pós-processamento: Reverendo e Arcipreste
+    # - Reverendo prevalece sobre Padre (não manter ambos na mesma pessoa)
+    # - Arcip./Arcipreste é título e nunca faz parte do nome
+    # ------------------------------------------------------------------
+    _arcip_prefix_orig = re.compile(r'^(?:o\s*)?Arcip(?:\.|reste|r\.e)\s+', re.IGNORECASE)
+    _arcip_prefix_expd = re.compile(r'^(?:o\s*)?Arcipreste\s+', re.IGNORECASE)
+    _arcip_obs = re.compile(r'\bArcip(?:\.|reste|r\.e)\b', re.IGNORECASE)
+    for r in rows:
+        had_arcip = (
+            bool(_arcip_prefix_orig.search(r["NomeOriginal"]))
+            or bool(_arcip_prefix_expd.search(r["NomeAtualizado"]))
+            or bool(_arcip_obs.search(r["Observações"]))
+        )
+
+        if had_arcip:
+            r["NomeOriginal"] = _arcip_prefix_orig.sub("", r["NomeOriginal"]).strip()
+            r["NomeAtualizado"] = _arcip_prefix_expd.sub("", r["NomeAtualizado"]).strip()
+            if "arcipreste" not in r["Observações"].lower():
+                r["Observações"] = "; ".join(filter(None, [r["Observações"], "Arcipreste"]))
+            r["Observações"] = _arcip_obs.sub("Arcipreste", r["Observações"])
+
+        if "reverendo" in r["Observações"].lower() and "padre" in r["Observações"].lower():
+            obs = re.sub(r'(?i)\bPadre\b', '', r["Observações"])
+            obs = re.sub(r'\s*;\s*;\s*', '; ', obs)
+            r["Observações"] = re.sub(r'^\s*;\s*|\s*;\s*$', '', obs).strip()
+
+    # ------------------------------------------------------------------
+    # Pós-processamento: Jacinto/Iacinto Ant.o Machado com Padre sem Sacristão
+    # Caso recorrente em que a palavra Sacristão não é extraída.
+    # ------------------------------------------------------------------
+    _jacinto_machado_orig = re.compile(r'^(?:I|J)acint[oa]\s+Ant\.o\s+Machado$', re.IGNORECASE)
+    _jacinto_machado_expd = re.compile(r'^Jacint[oa]\s+Ant[oó]nio\s+Machado$', re.IGNORECASE)
+    for r in rows:
+        if "padre" not in r["Observações"].lower() or "sacristão" in r["Observações"].lower():
+            continue
+        if not (_jacinto_machado_orig.match(r["NomeOriginal"]) or _jacinto_machado_expd.match(r["NomeAtualizado"])):
+            continue
+        # "Iacinto/Jacinto" neste padrão é leitura errada de "Sacristão".
+        r["NomeOriginal"] = "Ant.o Machado"
+        r["NomeAtualizado"] = "António Machado"
+        r["Sexo"] = "M"
+        r["EstadoCivil"] = "solteiro"
+        r["Observações"] = "; ".join(filter(None, [r["Observações"], "Sacristão"]))
+
+    # ------------------------------------------------------------------
     # Pós-processamento: "oP.e" lido como "D." + "Sopti" na confissão
     # Corrige entradas masculinas onde o prefixo "D." no nome é leitura
     # errada de "o P.e" (padre), sinalizada por Sopti/Spti.
@@ -952,7 +1013,7 @@ def build_table(pages_data: list[dict]) -> list[dict]:
     # Pós-processamento: D.or/Dr./oD.or no nome → Doutor em observações
     # Títulos académicos não fazem parte do nome.
     # ------------------------------------------------------------------
-    _doutor_prefix_orig = re.compile(r'^(?:o\s*)?D\.?\s*or\.?\s+', re.IGNORECASE)
+    _doutor_prefix_orig = re.compile(r'^(?:o\s*)?(?:D\.?\s*or\.?|Doutor)\s+', re.IGNORECASE)
     _doutor_prefix_expd = re.compile(r'^(?:o\s*)?Doutor\s+', re.IGNORECASE)
     for r in rows:
         had_doutor_prefix = (
@@ -965,6 +1026,31 @@ def build_table(pages_data: list[dict]) -> list[dict]:
             r["Observações"] = "; ".join(filter(None, ["Doutor", r["Observações"]]))
         r["NomeOriginal"] = _doutor_prefix_orig.sub("", r["NomeOriginal"]).strip()
         r["NomeAtualizado"] = _doutor_prefix_expd.sub("", r["NomeAtualizado"]).strip()
+
+    # ------------------------------------------------------------------
+    # Pós-processamento: oManjor mal lido como "Doutor Manoel"
+    # Caso recorrente: "oManjor Jozé Frz." convertido indevidamente para
+    # "Doutor Manoel Jozé Frz.". Corrige para título "Major" e remove
+    # "Manoel" indevido do nome.
+    # ------------------------------------------------------------------
+    _manjor_false_doutor_orig = re.compile(r'^(?:Manoel|Manuel)\s+Joz[ée]\s+Frz\.?$', re.IGNORECASE)
+    _manjor_false_doutor_expd = re.compile(r'^(?:Manoel|Manuel)\s+Jos[ée]\s+Fernandes$', re.IGNORECASE)
+    for r in rows:
+        if "doutor" not in r["Observações"].lower():
+            continue
+        if not (
+            _manjor_false_doutor_orig.match(r["NomeOriginal"])
+            or _manjor_false_doutor_expd.match(r["NomeAtualizado"])
+        ):
+            continue
+
+        r["NomeOriginal"] = re.sub(r'^(?:Doutor\s+)?(?:Manoel|Manuel)\s+', '', r["NomeOriginal"], flags=re.IGNORECASE)
+        r["NomeAtualizado"] = re.sub(r'^(?:Manoel|Manuel)\s+', '', r["NomeAtualizado"], flags=re.IGNORECASE)
+
+        obs = re.sub(r'(?i)\b(?:o\s+)?doutor\b', '', r["Observações"])
+        obs = re.sub(r'\s*;\s*;\s*', '; ', obs)
+        obs = re.sub(r'^\s*;\s*|\s*;\s*$', '', obs).strip()
+        r["Observações"] = "; ".join(filter(None, ["Major", obs]))
 
     # ------------------------------------------------------------------
     # Pós-processamento: criado/criada com "casado/a" → solteiro/a
@@ -989,6 +1075,32 @@ def build_table(pages_data: list[dict]) -> list[dict]:
     for r in rows:
         if _cicrava_pat.search(r["Observações"]):
             r["Observações"] = _cicrava_pat.sub("Escrava", r["Observações"])
+
+    # ------------------------------------------------------------------
+    # Pós-processamento: título "Major" (oManjor/oMajor/Manjor/Major)
+    # Remove o título do nome e regista em observações.
+    # ------------------------------------------------------------------
+    _major_prefix_orig = re.compile(r'^(?:o\s*)?manj(?:o|0)r\.?\s+', re.IGNORECASE)
+    _major_prefix_expd = re.compile(r'^(?:o\s*)?major\s+', re.IGNORECASE)
+    for r in rows:
+        had_major_prefix = (
+            bool(_major_prefix_orig.search(r["NomeOriginal"]))
+            or bool(_major_prefix_expd.search(r["NomeAtualizado"]))
+        )
+        if not had_major_prefix:
+            continue
+
+        r["NomeOriginal"] = _major_prefix_orig.sub("", r["NomeOriginal"]).strip()
+        r["NomeAtualizado"] = _major_prefix_expd.sub("", r["NomeAtualizado"]).strip()
+
+        if "major" not in r["Observações"].lower():
+            r["Observações"] = "; ".join(filter(None, ["Major", r["Observações"]]))
+
+        # Evita conflito de títulos quando o erro inicial foi lido como "Doutor".
+        if "doutor" in r["Observações"].lower():
+            obs = re.sub(r'(?i)\b(?:o\s+)?doutor\b', '', r["Observações"])
+            obs = re.sub(r'\s*;\s*;\s*', '; ', obs)
+            r["Observações"] = re.sub(r'^\s*;\s*|\s*;\s*$', '', obs).strip()
 
     # ------------------------------------------------------------------
     # Pós-processamento: "aus.te" lido no nome ou não movido para observações
