@@ -621,6 +621,10 @@ antes da linha (S.ª / solt. = solteira, cas. = casada, viu. = viúva, etc.). \
 Se não houver indicação de estado civil, aplica a regra de omissão normal; \
 **nunca derives "viúvo/a" da simples presença de `F.`**.
 10. Se não conseguires ler uma palavra, usa "[ilegível]".
+10b. **Página em branco**: se a imagem estiver em branco (sem nomes/fogos), ou se apenas tiver
+uma anotação de controlo como `Branca`, `Em branco`, `Página em branco`, devolve **exatamente**:
+`{{"lugar_atual": null, "lugar_proximo": null, "grupos": []}}`.
+Não inventes pessoas, lugares, fogos nem observações a partir desta anotação.
 11. **Lugar**: um indicador de lugar (texto em letras maiores) aplica-se APENAS aos fogos \
 que aparecem A SEGUIR a esse indicador, nunca aos fogos anteriores. \
 Há três posições possíveis para o indicador: \
@@ -690,12 +694,17 @@ def call_gemini(image: Image.Image, prompt: str, model, lugar_atual: str = "") -
             return json.loads(text)
 
         except json.JSONDecodeError as exc:
+            # Em páginas sem conteúdo genealógico o modelo pode devolver apenas
+            # uma frase do tipo "página em branco" em vez de JSON.
+            if re.search(r"(?i)\b(branca|em branco|p[aá]gina em branco)\b", text):
+                return {"lugar_atual": None, "lugar_proximo": None, "grupos": []}
+
             print(f"    [tentativa {attempt}/{MAX_RETRIES}] Resposta não é JSON válido: {exc}")
             if attempt < MAX_RETRIES:
                 time.sleep(RETRY_DELAY)
             else:
                 print("    AVISO: a ignorar esta página (resposta inválida).")
-                return {"lugar_atual": None, "grupos": []}
+                return {"lugar_atual": None, "lugar_proximo": None, "grupos": []}
 
         except Exception as exc:
             exc_str = str(exc)
@@ -717,9 +726,9 @@ def call_gemini(image: Image.Image, prompt: str, model, lugar_atual: str = "") -
                     time.sleep(RETRY_DELAY)
                 else:
                     print("    AVISO: a ignorar esta página (erro na API).")
-                    return {"lugar_atual": None, "grupos": []}
+                    return {"lugar_atual": None, "lugar_proximo": None, "grupos": []}
 
-    return {"lugar_atual": None, "grupos": []}
+    return {"lugar_atual": None, "lugar_proximo": None, "grupos": []}
 
 # ====================================================================
 # CONSTRUÇÃO DA TABELA FINAL
