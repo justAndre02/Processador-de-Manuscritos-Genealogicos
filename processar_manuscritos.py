@@ -1140,8 +1140,8 @@ def build_table(pages_data: list[dict]) -> list[dict]:
             # Remover "menor" se for erro provável por "aus.te"
             if "menor" in r["Observações"].lower():
                 obs = re.sub(r'(?i)\bmenor\b', '', r["Observações"])
-                obs = re.sub(r'\s*;\s*;\s*', '; ', obs)
-                r["Observações"] = re.sub(r'^\s*;\s*|\s*;\s*$', '', obs).strip()
+                obs = re.sub(r'\s*[,;]\s*[,;]\s*', ', ', obs)
+                r["Observações"] = re.sub(r'^\s*[,;]\s*|\s*[,;]\s*$', '', obs).strip()
 
     # ------------------------------------------------------------------
     # Pós-processamento: irmão/irmã com "cunhado/a" nas observações
@@ -1293,9 +1293,14 @@ def build_table(pages_data: list[dict]) -> list[dict]:
             '',
             r["Observações"],
         )
-        obs_clean = re.sub(r'\s*;\s*;\s*', '; ', obs_clean)
-        obs_clean = re.sub(r'^\s*;\s*|\s*;\s*$', '', obs_clean).strip()
-        r["Observações"] = "; ".join(filter(None, [obs_clean, termo]))
+        obs_clean = re.sub(r'\s*[,;]\s*[,;]\s*', '; ', obs_clean)
+        obs_clean = re.sub(r'^\s*[,;]\s*|\s*[,;]\s*$', '', obs_clean).strip()
+        
+        # Junta evitando vazios e substituindo eventuais vírgulas sozinhas esquecidas
+        partes = [p.strip() for p in re.split(r'[,;]', obs_clean) if p.strip()]
+        if termo not in partes:
+            partes.append(termo)
+        r["Observações"] = ", ".join(partes)
 
         if r["Parentesco"] in ("", "desconhecido"):
             r["Parentesco"] = "outro"
