@@ -189,6 +189,7 @@ cr.º/cr.ª = criado/criada; etc.)
 - Ausência de qualquer texto após a linha horizontal → `confessou = "não"`. \
 **`F.`** que apareça **acima ou ao longo da linha** (como anotação separada) significa que a \
 pessoa **faleceu** — coloca "falecida" (sexo F) ou "falecido" (sexo M) em `observacoes`. \
+**`pg` / `pag`** que apareça **acima da linha horizontal** ou como anotação separada: significa que a pessoa pagou — coloca `"pagou"` em `observacoes`. \
 `F.` é independente de "Confes.": os dois podem coexistir na mesma linha; \
 `confessou` segue a regra definida acima (qualquer texto = "sim"; ausência = "não"). \
 **IMPORTANTE**: `F.` = falecimento NÃO implica viúvo/a — o `estado_civil` deve reflectir \
@@ -437,6 +438,7 @@ Exemplo: `"Maria de S. Cajo"` → `nome_expandido="Maria de São Paio"`.
 **`de S. do Carmo`**: nesta fórmula onomástica, `S.` significa **Senhora** (devoção mariana), \
 não `São`. Portanto, `de S. do Carmo` deve ser expandido para **`de Senhora do Carmo`** \
 e NUNCA para `de São do Carmo`.
+**Atenção paleográfica — `Pace lo`**: o nome `Paulo` pode ser mal lido como `Pace lo` devido à forma como as letras cursivas se ligam. Se leres `Pace lo` (ou semelhante) como nome próprio, reconsidera: é quase certamente `Paulo`. O `nome_original` deve registar a forma que parece estar escrita se assim o entenderes, mas o `nome_expandido` DEVE ser `"Paulo"`. Se leres "Pace lo", nunca o convertas para "Marcelo" ou outro nome.
 **Atenção paleográfica — `Ilena Iosefa` / `Ilena Josefa`**: o nome `Ilena` (variante arcaica de Helena) \
 tem um `I` maiúsculo cursivo que é comumente mal lido como `M`, podendo transformar "Ilena" \
 em "Maria". Além disso, o segundo nome `Iosefa` ou `Josefa` confunde-se facilmente com `Iozé` ou `José` (com a laçada inferior do f confundida com a de um z). \

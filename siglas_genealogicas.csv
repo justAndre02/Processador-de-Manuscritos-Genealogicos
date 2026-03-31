@@ -20,7 +20,7 @@ cass.do / cass.ª,casado / casada,estado civil/filiação,estado civil,registos 
 def.to / def.ta / def.,defunto / defunta,estado civil/filiação,falecido,"""João, def.to""",Usado em óbitos
 test. / testa.,testamento / testador,termos administrativos,acto notarial,documentos notariais,Usado em inventários
 p.º / P.º,Pedro / Pero,nomes próprios,nome próprio,"""P.º Manuel""",Abreviação comum
-Joaq.m / Joaqq.m,Joaquim,nomes próprios,nome próprio,índices paroquiais,q duplicado
+Joaq.m / Joaqq.m / Ioaq.m,Joaquim,nomes próprios,nome próprio,índices paroquiais,q duplicado
 M.a / Maª,Maria,nomes próprios,nome próprio,"""M.a Francisca""",Muito comum
 Ign.o,Inácio,nomes próprios,nome próprio,registos antigos,Arcaísmo
 D. / D.ª / D.n,Dom / Dona,tratamentos/títulos,tratamento honorífico,assinaturas,"Tratamento nobre, deve ser expandido no Nome Atualizado para Dom ou Dona"
