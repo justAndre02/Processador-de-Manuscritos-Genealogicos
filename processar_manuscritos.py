@@ -23,7 +23,8 @@ from datetime import datetime
 from dotenv import load_dotenv  # pip install python-dotenv
 import fitz
 from PIL import Image
-import google.generativeai as genai
+from google import genai
+from google.genai import types
 
 # Carrega variáveis do ficheiro .env (se existir)
 load_dotenv()
@@ -32,7 +33,7 @@ load_dotenv()
 # CONFIGURAÇÃO — editar antes de correr
 # ====================================================================
 API_KEY        = os.getenv("GEMINI_API_KEY", "")  # definido no ficheiro .env
-GEMINI_MODEL   = "gemini-3.1-flash-lite-preview"
+GEMINI_MODEL   = "gemini-3.1-flash-lite"
 INPUT_FOLDER   = "manuscritos"              # Pasta com os PDFs de entrada
 OUTPUT_FOLDER  = "saida"                    # Pasta para os ficheiros de saída
 CSV_MAPPING    = "siglas_genealogicas.csv"
@@ -706,6 +707,7 @@ def call_gemini(image: Image.Image, prompt: str, model, lugar_atual: str = "") -
     full_prompt = prompt + page_context
 
     for attempt in range(1, MAX_RETRIES + 1):
+        text = ""
         try:
             response = model.generate_content(
                 [full_prompt, image],
