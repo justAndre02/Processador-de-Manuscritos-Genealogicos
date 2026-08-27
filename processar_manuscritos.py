@@ -33,7 +33,7 @@ load_dotenv()
 # CONFIGURAÇÃO — editar antes de correr
 # ====================================================================
 API_KEY        = os.getenv("GEMINI_API_KEY", "")  # definido no ficheiro .env
-GEMINI_MODEL   = "gemini-3.1-flash-lite"
+GEMINI_MODEL   = "gemini-3.5-flash-lite"
 INPUT_FOLDER   = "manuscritos"              # Pasta com os PDFs de entrada
 OUTPUT_FOLDER  = "saida"                    # Pasta para os ficheiros de saída
 CSV_MAPPING    = "siglas_genealogicas.csv"

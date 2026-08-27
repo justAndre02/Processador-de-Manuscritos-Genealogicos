@@ -82,7 +82,7 @@ GEMINI_API_KEY=a_tua_chave_aqui
 Edita as constantes no topo de `processar_manuscritos.py`:
 
 ```python
-GEMINI_MODEL        = "gemini-3.1-flash-lite-preview"     # confirmar nome actual em aistudio.google.com
+GEMINI_MODEL        = "gemini-3.5-flash-lite-preview"     # confirmar nome actual em aistudio.google.com
 INPUT_FOLDER        = "manuscritos"                       # pasta com os PDFs
 OUTPUT_FOLDER       = "saida"                             # pasta para os resultados
 PDF_DPI             = 200                                 # resolução de conversão
